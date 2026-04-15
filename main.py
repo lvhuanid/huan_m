@@ -6,36 +6,48 @@ import operator
 class State(TypedDict):
     messages: Annotated[list, operator.add]
     counter: int
+    user_approval: str  # 新增：用于存放人工指令（'yes' 或 'no'）
 
 def chat_node(state: State):
-    new_count = state.get("counter", 0) + 1
+    # 根据人工反馈决定逻辑
+    if state.get("user_approval") == "yes":
+        new_count = state.get("counter", 0) + 1
+        msg = f"人工已批准，进入第 {new_count} 轮"
+    else:
+        new_count = state.get("counter", 0)
+        msg = f"人工拒绝或未操作，保持在第 {new_count} 轮"
+        
     return {
-        "messages": [f"第 {new_count} 轮对话"],
-        "counter": new_count
+        "messages": [msg],
+        "counter": new_count,
+        "user_approval": None # 重置审批状态
     }
 
 builder = StateGraph(State)
 builder.add_node("chat", chat_node)
 builder.set_entry_point("chat")
-builder.add_edge("chat", "chat") # 修改点：让节点指向自身形成循环
+builder.add_edge("chat", "chat")
 
-with SqliteSaver.from_conn_string("demo_fix.db") as checkpointer:
-    # 修改点：在 chat 节点执行后设置中断，防止死循环并保存状态
-    graph = builder.compile(checkpointer=checkpointer, interrupt_after=["chat"])
+with SqliteSaver.from_conn_string("human_loop.db") as checkpointer:
+    # 关键点：在执行 chat 节点前中断，等待人工输入
+    graph = builder.compile(checkpointer=checkpointer, interrupt_before=["chat"])
+    config = {"configurable": {"thread_id": "human-1"}}
+
+    # --- 第一阶段：初始化并运行到断点 ---
+    print("--- 启动工作流 ---")
+    graph.invoke({"messages": ["系统启动"], "counter": 0, "user_approval": ""}, config)
     
-    config = {"configurable": {"thread_id": "user-456"}}
+    # 此时图会停在 chat 节点之前，不会打印任何输出，因为节点还没跑
+    snapshot = graph.get_state(config)
+    print(f"当前状态：{snapshot.values['messages'][-1]}，等待节点：{snapshot.next}")
+
+    # --- 第二阶段：人工干预 (Human Input) ---
+    print("\n--- 人工干预：输入审批结果 ---")
+    # 模拟外部输入：手动更新线程状态
+    graph.update_state(config, {"user_approval": "yes"}, as_node="chat")
     
-    print("=== 第一次对话 ===")
-    result1 = graph.invoke({"messages": [], "counter": 0}, config)
-    print(f"消息: {result1['messages']}")
-    print(f"计数器: {result1['counter']}")
-    
-    print("\n=== 第二次对话 ===")
-    result2 = graph.invoke(None, config)
-    print(f"消息: {result2['messages']}")
-    print(f"计数器: {result2['counter']}")
-    
-    print("\n=== 第三次对话 ===")
-    result3 = graph.invoke(None, config)
-    print(f"消息: {result3['messages']}")
-    print(f"计数器: {result3['counter']}")
+    # --- 第三阶段：恢复运行 ---
+    print("--- 恢复工作流 ---")
+    result = graph.invoke(None, config)
+    print(f"执行结果：{result['messages'][-1]}")
+    print(f"计数器数值：{result['counter']}")
