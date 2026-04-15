@@ -9,6 +9,10 @@ from langchain_ollama import OllamaLLM
 from langchain_community.vectorstores import FAISS
 from langchain_community.retrievers import BM25Retriever
 
+from unstructured.partition.pdf import partition_pdf
+from langchain_core.documents import Document
+
+
 os.environ["NO_PROXY"] = "localhost,127.0.0.1"
 
 
@@ -39,6 +43,43 @@ class CustomHybridRetriever(BaseRetriever):
         
         return unique_docs[:self.top_k]
 
+
+def process_pdf_with_images(file_path: str):
+    print(f"🚀 正在使用 Unstructured 解析 PDF: {file_path}")
+    
+    # 1. 核心解析逻辑
+    elements = partition_pdf(
+        filename=file_path,
+        # 策略设为 hi_res 会触发布局检测
+        strategy="hi_res", 
+        
+        # 识别图片中的文字 (OCR)
+        infer_table_structure=True,
+        # extract_images_in_pdf=True, 
+        
+        # 这里的模型通常会自动下载 (如 yolo, detectron2)
+        hi_res_model_name="yolox",
+        languages=["chi_sim", "eng"],
+
+        # 图片保存路径（如果需要单独查看提取出的图片）
+        # extract_image_block_output_dir="extracted_images",
+    )
+
+    # 2. 将解析出的 Element 转换为 LangChain 的 Document
+    docs = []
+    for element in elements:
+        # element 类型可能是 Table, NarrativeText, Image, Title 等
+        # Unstructured 已经帮我们将图片里的文字通过 OCR 转成了文本
+        metadata = element.metadata.to_dict()
+        metadata["type"] = element.category
+        
+        new_doc = Document(
+            page_content=element.text,
+            metadata=metadata
+        )
+        docs.append(new_doc)
+    
+    return docs
 # --- 2. 环境准备与模型初始化 ---
 # 确保你的 Ollama 已启动，并且有这两个模型
 embeddings = OllamaEmbeddings(model="nomic-embed-text")
@@ -52,8 +93,18 @@ raw_documents = [
     "客服部小李负责售后咨询，工作时间 9:00 - 18:00。"
 ]
 
+# 1. 使用 Unstructured 解析 PDF (包含图片 OCR 逻辑)
+pdf_docs = process_pdf_with_images("su7.pdf")
+
+# 2. 初始化切分器
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=512, chunk_overlap=50)
-chunks = text_splitter.create_documents(raw_documents)
+
+# 3. 关键修改：对解析出的 PDF 文档进行切分
+# 注意：这里使用 split_documents 而不是 create_documents
+chunks = text_splitter.split_documents(pdf_docs)
+
+print(f"✅ PDF 解析完成，切分为 {len(chunks)} 个数据块。")
+
 
 # --- 4. 构建检索组件 ---
 # 创建向量库
@@ -95,7 +146,7 @@ def run_rag_pipeline(question: str):
 
 # --- 6. 测试运行 ---
 if __name__ == "__main__":
-    query = "PRJ-2026 的负责人是谁？产品芯片是什么？公司地址在哪里？"
+    query = "外观颜色有哪些？能源类型是什么？"
     result = run_rag_pipeline(query)
     print("\n✨ 最终回答:")
     print(result)
