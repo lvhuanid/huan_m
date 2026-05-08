@@ -1,4 +1,5 @@
 # config.py
+# docker run -d --name redis-6380 -p 6380:6379 redis:latest
 import os
 from dotenv import load_dotenv
 
