@@ -1,50 +1,48 @@
 from openai import OpenAI
 
-# ================= 配置区域（仅这里修改） =================
-# 指向 Ollama 的本地兼容接口
 client = OpenAI(
     base_url="http://localhost:11434/v1",
-    api_key="ollama"  # 这里可以随便填，Ollama 不需要真实 Key
+    api_key="ollama"
 )
 
-# ================= 1. 最小知识库 =================
-knowledge_base = [
-    "豆包是字节跳动于2024年发布的AI大模型。",
-    "项目驱动学习法（Project-based Learning）的核心是：先做出来，再补理论。",
-    "流式输出（Streaming）的原理是服务端一边生成数据，客户端一边接收。"
-]
+def load_knowledge_base(file_path):
+    with open(file_path, "r", encoding="utf-8") as f:
+        return [line.strip() for line in f if line.strip()]
 
-# ================= 2. 极简“检索器” =================
+knowledge_base = load_knowledge_base("my_knowledge.txt")
+
 def find_relevant_info(user_question):
     return "\n".join(knowledge_base)
 
-# ================= 3. 核心问答逻辑 =================
 def chat_with_knowledge():
     user_input = input("请输入你的问题：")
     
     context = find_relevant_info(user_input)
-    system_message = f"""你是一个乐于助人的知识库助手。
-请仅根据以下【知识库】内容回答用户的问题。
-如果知识库中没有答案，请直接说“根据现有知识无法回答”。
-
-【知识库】
+    
+    # 🚩 修改点1：不再使用 system message，而是把所有内容拼在 user 里
+    # 并且稍微调整了一下语气，更适合小模型
+    final_prompt = f"""以下是参考知识库：
 {context}
-"""
 
-    # 这里模型名改成 Ollama 里的模型名
+请根据上面的参考知识库，回答用户的问题：{user_input}
+如果知识库里没有相关内容，请回答“根据现有知识无法回答”。"""
+
+    # 🚩 修改点2：加入 Debug，看看发给模型的到底是什么
+    print("\n[DEBUG] 发给模型的完整内容：")
+    print("-"*30)
+    print(final_prompt)
+    print("-"*30, "\n")
+
     stream = client.chat.completions.create(
-        model="llama3.2:1b",  # 👈 修改这里
-        messages=[
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": user_input}
-        ],
+        model="llama3.2:1b",
+        # 这里只有 user，没有 system
+        messages=[{"role": "user", "content": final_prompt}],
         stream=True,
         temperature=0
     )
 
-    print("\n助手：", end="", flush=True)
+    print("助手：", end="", flush=True)
     for chunk in stream:
-        # Ollama 返回的字段结构和 OpenAI 一致
         content = chunk.choices[0].delta.content
         if content:
             print(content, end="", flush=True)
