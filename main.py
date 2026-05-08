@@ -1,55 +1,54 @@
-import os
-from datetime import datetime
-from langchain.tools import tool
-from langchain.agents import AgentExecutor, create_tool_calling_agent
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_ollama import ChatOllama
+from openai import OpenAI
 
-
-
-os.environ["NO_PROXY"] = "localhost,127.0.0.1"
-
-llm = ChatOllama(model="qwen3.5:cloud", temperature=0)
-
-@tool
-def get_weekday(date: str) -> str:
-    """
-    根据输入的日期返回对应的星期几。
-    日期格式必须为 YYYY-MM-DD，例如 2025-12-12。
-    """
-    try:
-        dt = datetime.strptime(date, "%Y-%m-%d")
-        weekdays = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
-        return weekdays[dt.weekday()]
-    except ValueError:
-        return "请输入YYYY-MM-DD格式的日期"
-
-tools = [get_weekday]
-
-system_prompt = """你是一个日期查询助手。
-- 如果用户询问某个日期是星期几，请调用 get_weekday 工具查询。
-- 工具接收的日期参数必须是 'YYYY-MM-DD' 格式。
-- 如果用户输入的日期格式不正确，请提示“请输入YYYY-MM-DD格式的日期”。
-- 用中文回答用户。"""
-
-prompt = ChatPromptTemplate.from_messages([
-    ("system", system_prompt),
-    ("user", "{input}"),
-    MessagesPlaceholder(variable_name="agent_scratchpad")
-])
-
-agent = create_tool_calling_agent(llm, tools, prompt)
-
-agent_executor = AgentExecutor(
-    agent=agent,
-    tools=tools,
-    verbose=True,
-    handle_parsing_errors=True,
-    max_iterations=3
+# ================= 配置区域（仅这里修改） =================
+# 指向 Ollama 的本地兼容接口
+client = OpenAI(
+    base_url="http://localhost:11434/v1",
+    api_key="ollama"  # 这里可以随便填，Ollama 不需要真实 Key
 )
 
+# ================= 1. 最小知识库 =================
+knowledge_base = [
+    "豆包是字节跳动于2024年发布的AI大模型。",
+    "项目驱动学习法（Project-based Learning）的核心是：先做出来，再补理论。",
+    "流式输出（Streaming）的原理是服务端一边生成数据，客户端一边接收。"
+]
+
+# ================= 2. 极简“检索器” =================
+def find_relevant_info(user_question):
+    return "\n".join(knowledge_base)
+
+# ================= 3. 核心问答逻辑 =================
+def chat_with_knowledge():
+    user_input = input("请输入你的问题：")
+    
+    context = find_relevant_info(user_input)
+    system_message = f"""你是一个乐于助人的知识库助手。
+请仅根据以下【知识库】内容回答用户的问题。
+如果知识库中没有答案，请直接说“根据现有知识无法回答”。
+
+【知识库】
+{context}
+"""
+
+    # 这里模型名改成 Ollama 里的模型名
+    stream = client.chat.completions.create(
+        model="llama3.2:1b",  # 👈 修改这里
+        messages=[
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": user_input}
+        ],
+        stream=True,
+        temperature=0
+    )
+
+    print("\n助手：", end="", flush=True)
+    for chunk in stream:
+        # Ollama 返回的字段结构和 OpenAI 一致
+        content = chunk.choices[0].delta.content
+        if content:
+            print(content, end="", flush=True)
+    print("\n")
+
 if __name__ == "__main__":
-    response = agent_executor.invoke({"input": "2025-12-12是星期几"})
-    print("回答:", response["output"])
-    response = agent_executor.invoke({"input": "12/12/2025是星期几"})
-    print("回答:", response["output"])
+    chat_with_knowledge()
