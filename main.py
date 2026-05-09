@@ -3,6 +3,10 @@ import numpy as np
 import pickle
 import os
 from dotenv import load_dotenv
+from datetime import datetime
+import json
+
+
 
 load_dotenv()  # 从 .env 文件加载环境变量
 
@@ -16,87 +20,72 @@ client = OpenAI(
     api_key=os.environ.get("DEEPSEEK_API_KEY")
 )
 # EMBEDDING_MODEL = "deepseek-embedding"
-CHAT_MODEL = "deepseek-v4-flash"
+MODEL = "deepseek-v4-flash"
 # VECTOR_CACHE_FILE = "knowledge_vectors_deepseek.pkl"
 
-ollama_client = OpenAI(
-    base_url="http://localhost:11434/v1",
-    api_key="ollama"
-)
+# ollama_client = OpenAI(
+#     base_url="http://localhost:11434/v1",
+#     api_key="ollama"
+# )
 
-EMBEDDING_MODEL = "qwen3-embedding:4b"
-# CHAT_MODEL = "qwen2.5:3b" # 建议升级到3B，效果会好很多
-VECTOR_CACHE_FILE = "knowledge_vectors.pkl" # 向量缓存文件名
+# EMBEDDING_MODEL = "qwen3-embedding:4b"
+# # CHAT_MODEL = "qwen2.5:3b" # 建议升级到3B，效果会好很多
+# VECTOR_CACHE_FILE = "knowledge_vectors.pkl" # 向量缓存文件名
 
-# ================= 1. 核心工具函数 =================
-def get_embedding(text):
-    """调用 Ollama 获取文本的向量表示"""
-    response = ollama_client.embeddings.create(
-        model=EMBEDDING_MODEL,
-        input=text
-    )
-    return np.array(response.data[0].embedding)
+def get_current_time():
+    """获取当前系统时间"""
+    return f"当前时间是：{datetime.now().strftime('%Y年%m月%d日 %H:%M:%S')}"
 
-def cosine_similarity(vec1, vec2):
-    """计算两个向量的余弦相似度"""
-    dot_product = np.dot(vec1, vec2)
-    norm1 = np.linalg.norm(vec1)
-    norm2 = np.linalg.norm(vec2)
-    return dot_product / (norm1 * norm2)
-
-# ================= 2. 智能加载知识库（带缓存） =================
-def load_knowledge_base(file_path):
-    """读取txt文件，每一行作为一条知识存入列表"""
-    with open(file_path, "r", encoding="utf-8") as f:
-        return [line.strip() for line in f if line.strip()]
-
-def load_or_create_vectors(knowledge_texts, cache_file):
+def calculate_expression(expression):
+    """计算数学表达式的值
+    Args:
+        expression: 要计算的数学表达式，如"2+3*4"
     """
-    智能加载向量：
-    1. 如果缓存文件存在，直接加载
-    2. 如果不存在，生成向量并保存到缓存
-    """
-    if os.path.exists(cache_file):
-        print(f"发现向量缓存文件 {cache_file}，正在加载...")
-        with open(cache_file, "rb") as f:
-            cached_data = pickle.load(f)
-            
-        # 检查缓存是否和当前知识库一致
-        if cached_data["knowledge_texts"] == knowledge_texts:
-            print("缓存匹配成功！")
-            return cached_data["knowledge_embeddings"]
-        else:
-            print("知识库已更新，需要重新生成向量...")
-    
-    # 缓存不存在或不匹配，重新生成
-    print(f"正在使用 {EMBEDDING_MODEL} 生成知识库向量，请稍候...")
-    knowledge_embeddings = [get_embedding(f"search_document: {text}") for text in knowledge_texts]
-    
-    # 保存到缓存
-    with open(cache_file, "wb") as f:
-        pickle.dump({
-            "knowledge_texts": knowledge_texts,
-            "knowledge_embeddings": knowledge_embeddings
-        }, f)
-    print(f"向量已保存到缓存文件 {cache_file}！")
-    
-    return knowledge_embeddings
+    try:
+        # 注意：eval有安全风险，这里仅用于演示
+        result = eval(expression)
+        return f"计算结果：{expression} = {result}"
+    except Exception as e:
+        return f"计算错误：{str(e)}"
 
-# 程序启动时智能加载
-knowledge_texts = load_knowledge_base("my_knowledge.txt")
-knowledge_embeddings = load_or_create_vectors(knowledge_texts, VECTOR_CACHE_FILE)
-print("知识库加载完成！\n")
+# ================= 2. 告诉模型我们有哪些工具 =================
+# 这是一个标准的OpenAI工具定义格式
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "get_current_time",
+            "description": "获取当前系统时间",
+            "parameters": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_expression",
+            "description": "计算数学表达式的值",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "expression": {
+                        "type": "string",
+                        "description": "要计算的数学表达式，如'2+3*4'"
+                    }
+                },
+                "required": ["expression"]
+            }
+        }
+    }
+]
 
-# ================= 3. 检索器（带Nomic官方前缀优化） =================
-def find_relevant_info(user_question, top_k=3):
-    query_embedding = get_embedding(f"search_query: {user_question}")
-    similarities = [cosine_similarity(query_embedding, emb) for emb in knowledge_embeddings]
-    top_indices = np.argsort(similarities)[::-1][:top_k]
-    results = [knowledge_texts[i] for i in top_indices]
-    return "\n".join(results)
-
-# ================= 4. 核心问答逻辑 =================
-def chat_with_knowledge():
+# ================= 3. 核心工具调用逻辑 =================
+def chat_with_tools():
+    messages = []
+    
     while True:
         user_input = input("请输入你的问题（输入'退出'结束）：")
         
@@ -104,69 +93,69 @@ def chat_with_knowledge():
             print("再见！")
             break
         
-        print("\n" + "="*50)
-        print(f"[DEBUG] 用户问题：{user_input}")
+        messages.append({"role": "user", "content": user_input})
         
-        context = find_relevant_info(user_input, top_k=3)
-        print(f"\n[DEBUG] 检索到的上下文：")
-        print("-"*30)
-        print(context)
-        print("-"*30)
-        
-        final_prompt = f"""以下是参考知识库：
-{context}
-
-请严格根据上面的参考知识库回答用户的问题：{user_input}
-如果知识库中没有明确提到答案，请直接说"根据现有知识无法回答"。
-不要编造任何信息，不要添加任何知识库中没有的内容。"""
-        
-        print(f"\n[DEBUG] 发给模型的完整Prompt：")
-        print("-"*30)
-        print(final_prompt)
-        print("-"*30)
-        print("="*50 + "\n")
-
-        stream = client.chat.completions.create(
-            model=CHAT_MODEL,
-            messages=[{"role": "user", "content": final_prompt}],
-            stream=True,
-            temperature=0
+        # 第一步：让模型决定是否需要调用工具
+        response = client.chat.completions.create(
+            model=MODEL,
+            messages=messages,
+            tools=tools,
+            tool_choice="auto",  # 让模型自动决定是否调用工具
+            stream=False
         )
-
-        print("助手：", end="", flush=True)
-        for chunk in stream:
-            content = chunk.choices[0].delta.content
-            if content:
-                print(content, end="", flush=True)
-        print("\n")
-        user_input = input("请输入你的问题（输入'退出'结束）：")
         
-        if user_input.lower() in ["退出", "exit", "quit"]:
-            print("再见！")
-            break
+        response_message = response.choices[0].message
+        messages.append(response_message)
         
-        context = find_relevant_info(user_input, top_k=3)
+        # 第二步：检查模型是否要求调用工具
+        if response_message.tool_calls:
+            print("\n[DEBUG] 模型要求调用工具：")
+            
+            # 遍历所有工具调用请求
+            for tool_call in response_message.tool_calls:
+                function_name = tool_call.function.name
+                function_args = json.loads(tool_call.function.arguments)
+                
+                print(f"  调用函数：{function_name}")
+                print(f"  参数：{function_args}")
+                
+                # 第三步：执行对应的函数
+                if function_name == "get_current_time":
+                    function_response = get_current_time()
+                elif function_name == "calculate_expression":
+                    function_response = calculate_expression(**function_args)
+                else:
+                    function_response = f"未知函数：{function_name}"
+                
+                print(f"  执行结果：{function_response}\n")
+                
+                # 第四步：把工具执行结果返回给模型
+                messages.append({
+                    "role": "tool",
+                    "tool_call_id": tool_call.id,
+                    "name": function_name,
+                    "content": function_response
+                })
+            
+            # 第五步：让模型根据工具执行结果生成最终回答
+            second_response = client.chat.completions.create(
+                model=MODEL,
+                messages=messages,
+                stream=True
+            )
+            
+            print("助手：", end="", flush=True)
+            for chunk in second_response:
+                content = chunk.choices[0].delta.content
+                if content:
+                    print(content, end="", flush=True)
+            print("\n")
         
-        final_prompt = f"""以下是参考知识库：
-{context}
-
-请严格根据上面的参考知识库回答用户的问题：{user_input}
-如果知识库中没有明确提到答案，请直接说"根据现有知识无法回答"。
-不要编造任何信息，不要添加任何知识库中没有的内容。"""
-
-        stream = client.chat.completions.create(
-            model=CHAT_MODEL,
-            messages=[{"role": "user", "content": final_prompt}],
-            stream=True,
-            temperature=0
-        )
-
-        print("\n助手：", end="", flush=True)
-        for chunk in stream:
-            content = chunk.choices[0].delta.content
-            if content:
-                print(content, end="", flush=True)
-        print("\n")
+        else:
+            # 模型不需要调用工具，直接回答
+            print("\n助手：", end="", flush=True)
+            print(response_message.content)
+            print("\n")
 
 if __name__ == "__main__":
-    chat_with_knowledge()
+    chat_with_tools()
