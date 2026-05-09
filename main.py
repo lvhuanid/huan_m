@@ -84,7 +84,25 @@ tools = [
 
 # ================= 3. 核心工具调用逻辑 =================
 def chat_with_tools():
-    messages = []
+    messages = [
+        # 🔴 新增：强制模型使用工具的系统提示词
+        {"role": "system", "content": """你是一个严格按照流程工作的智能助手。
+你的工作流程必须是：
+1. 分析用户的问题，判断是否需要调用工具
+2. 如果需要，调用对应的工具获取结果
+3. **最重要：根据工具返回的结果，进行必要的推理和计算，然后回答用户的完整问题**
+4. 绝对不能只返回工具的原始输出，必须用自然语言整理并回答用户的完整问题
+
+例如：
+用户问："现在的时间加3小时是什么时候？"
+你应该：
+- 调用get_current_time工具，得到"2026年05月09日 17:14:38"
+- 自己计算：17:14:38 + 3小时 = 20:14:38
+- 回答："现在的时间是2026年05月09日 17:14:38，加3小时后是2026年05月09日 20:14:38"
+
+对于任何需要获取实时信息或计算的问题，你必须调用对应的工具，绝对不能直接回答。
+即使你知道答案，也必须先调用工具获取结果，再根据结果回答。"""}
+    ]
     
     while True:
         user_input = input("请输入你的问题（输入'退出'结束）：")
@@ -95,23 +113,20 @@ def chat_with_tools():
         
         messages.append({"role": "user", "content": user_input})
         
-        # 第一步：让模型决定是否需要调用工具
         response = client.chat.completions.create(
             model=MODEL,
             messages=messages,
             tools=tools,
-            tool_choice="auto",  # 让模型自动决定是否调用工具
+            tool_choice="auto",
             stream=False
         )
         
         response_message = response.choices[0].message
         messages.append(response_message)
         
-        # 第二步：检查模型是否要求调用工具
         if response_message.tool_calls:
             print("\n[DEBUG] 模型要求调用工具：")
             
-            # 遍历所有工具调用请求
             for tool_call in response_message.tool_calls:
                 function_name = tool_call.function.name
                 function_args = json.loads(tool_call.function.arguments)
@@ -119,7 +134,6 @@ def chat_with_tools():
                 print(f"  调用函数：{function_name}")
                 print(f"  参数：{function_args}")
                 
-                # 第三步：执行对应的函数
                 if function_name == "get_current_time":
                     function_response = get_current_time()
                 elif function_name == "calculate_expression":
@@ -129,7 +143,6 @@ def chat_with_tools():
                 
                 print(f"  执行结果：{function_response}\n")
                 
-                # 第四步：把工具执行结果返回给模型
                 messages.append({
                     "role": "tool",
                     "tool_call_id": tool_call.id,
@@ -137,7 +150,6 @@ def chat_with_tools():
                     "content": function_response
                 })
             
-            # 第五步：让模型根据工具执行结果生成最终回答
             second_response = client.chat.completions.create(
                 model=MODEL,
                 messages=messages,
@@ -152,7 +164,6 @@ def chat_with_tools():
             print("\n")
         
         else:
-            # 模型不需要调用工具，直接回答
             print("\n助手：", end="", flush=True)
             print(response_message.content)
             print("\n")
