@@ -2,4 +2,4 @@
 项目驱动学习法（Project-based Learning）的核心是：先做出来，再补理论。
 流式输出（Streaming）的原理是服务端一边生成数据，客户端一边接收。
 Ollama 是一个开源的本地大模型运行工具。
-Python 是一门胶水语言
+Python 是一门胶水语言 

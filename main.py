@@ -7,7 +7,7 @@ client = OpenAI(
     api_key="ollama"
 )
 EMBEDDING_MODEL = "nomic-embed-text:latest" # 👈 已修改
-CHAT_MODEL = "llama3.2:1b"
+CHAT_MODEL = "qwen2.5:3b"
 
 # ================= 1. 核心工具函数 =================
 def get_embedding(text):
