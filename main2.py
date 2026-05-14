@@ -2,6 +2,9 @@ import os
 from openai import OpenAI
 import json
 from dotenv import load_dotenv
+import instructor
+from pydantic import BaseModel
+
 
 load_dotenv()
 
@@ -32,16 +35,38 @@ prompt = """
 输出格式示例：{"name": "...", "company": "...", "position": "..."}
 """
 
-response = client.chat.completions.create(
-    model=model,
-     messages=[{"role": "user", "content": prompt}],
-    temperature=0,
-    response_format={"type": "json_object"}
-)
+# response = client.chat.completions.create(
+#     model=model,
+#      messages=[{"role": "user", "content": prompt}],
+#     temperature=0,
+#     response_format={"type": "json_object"}
+# )
 
-content = response.choices[0].message.content
-# 有时候模型会包在 ```json 代码块里，需要处理一下
-if "```json" in content:
-    content = content.split("```json")[1].split("```")[0].strip()
-data = json.loads(content)
-print(data)
+# content = response.choices[0].message.content
+# # 有时候模型会包在 ```json 代码块里，需要处理一下
+# if "```json" in content:
+#     content = content.split("```json")[1].split("```")[0].strip()
+# data = json.loads(content)
+# print(data)
+
+class PersonInfo(BaseModel):
+    name: str
+    company: str | None
+    position: str
+    skills: list[str]
+
+client = instructor.from_openai(OpenAI(
+    api_key=os.getenv("MODELSCOPE_API_KEY"),
+    base_url=os.getenv("LLM_BASE_URL")
+))
+
+# 让模型抽取
+info = client.chat.completions.create(
+    model=model,
+    response_model=PersonInfo,
+    messages=[{"role": "user", "content": "张三在腾讯担任前端工程师，擅长 React 和 TypeScript。"}],
+)
+print(info.name)        # 张三
+print(info.skills)
+
+# No completion choices found in LLM response (mode: Mode.TOOLS)
