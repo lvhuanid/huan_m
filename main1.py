@@ -67,4 +67,81 @@ model = os.getenv("LLM_MODEL_ID")
     # print(f"AI: {assistant_reply}")
     # messages.append({"role": "assistant", "content": assistant_reply})
 
+# 预设角色及其 system prompt
+ROLES = {
+    "1": {
+        "name": "心理咨询师",
+        "system_prompt": "你是一位温暖、专业的心理咨询师。请以共情的方式回应用户，适当提问，帮助ta梳理情绪。"
+    },
+    "2": {
+        "name": "段子手",
+        "system_prompt": "你是一个油麦的脱口秀演员，擅长用幽默的方式吐槽生活中的小事。回答要风趣，可以带梗。"
+    },
+    "3": {
+        "name": "面试官",
+        "system_prompt": "你是一位严格的互联网大厂面试官，主要考察候选人的系统设计能力。请提出有挑战性的问题，并对回答进行追问。"
+    }
+}
 
+def choose_role():
+    print("请选择聊天角色：")
+    for key, role in ROLES.items():
+        print(f"{key}. {role['name']}")
+    while True:
+        choice = input("输入编号（1/2/3）：").strip()
+        if choice in ROLES:
+            return ROLES[choice]
+        print("无效选择，请重新输入。")
+
+def chat_loop(system_prompt):
+    # 初始化消息列表，只包含系统设定
+    messages = [{"role": "system", "content": system_prompt}]
+    print(f"\n开始聊天（输入 exit 或 quit 退出）\n")
+
+    while True:
+        try:
+            user_input = input("你: ")
+        except EOFError:
+            break  # 处理 Ctrl+D
+
+        if user_input.lower() in ("exit", "quit"):
+            print("聊天结束，再见！")
+            break
+
+        # 将用户消息加入历史
+        messages.append({"role": "user", "content": user_input})
+
+        try:
+            # 流式调用
+            stream = client.chat.completions.create(
+                model=model,
+                messages=messages,
+                temperature=0.8,
+                stream=True
+            )
+        except Exception as e:
+            print(f"API 调用失败: {e}")
+            # 调用失败时移除刚刚加入的用户消息，避免破坏历史
+            messages.pop()
+            continue
+
+        # 打印助手前缀
+        print("AI: ", end='', flush=True)
+
+        # 收集完整回复
+        full_reply = ""
+
+        for chunk in stream:
+            delta = chunk.choices[0].delta
+            if delta.content:
+                print(delta.content, end='', flush=True)
+                full_reply += delta.content
+
+        print()  # 换行
+
+        # 将完整回复加入历史，供下一轮使用
+        messages.append({"role": "assistant", "content": full_reply})
+
+if __name__ == "__main__":
+    role = choose_role()
+    chat_loop(role["system_prompt"])
