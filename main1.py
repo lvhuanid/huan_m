@@ -8,22 +8,22 @@ client = OpenAI(
     api_key=os.getenv("MODELSCOPE_API_KEY"),
     base_url=os.getenv("LLM_BASE_URL")
 )
-EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL")
-ollama_client = OpenAI(
-    base_url="http://localhost:11434/v1",
-    api_key="ollama"
-)
+# EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL")
+# ollama_client = OpenAI(
+#     base_url="http://localhost:11434/v1",
+#     api_key="ollama"
+# )
 #   """调用 Ollama 获取文本的向量表示"""
 # response = ollama_client.embeddings.create(
 #     model=EMBEDDING_MODEL,
 #     input=text
 # )
-resp =  ollama_client.embeddings.create(
-    model=EMBEDDING_MODEL,
-    input=["今天天气真好", "下雨了，好冷"]
-)
-vec1 = resp.data[0].embedding  # 一个长列表，比如 1536 维
-vec2 = resp.data[1].embedding
+# resp =  ollama_client.embeddings.create(
+#     model=EMBEDDING_MODEL,
+#     input=["今天天气真好", "下雨了，好冷"]
+# )
+# vec1 = resp.data[0].embedding  # 一个长列表，比如 1536 维
+# vec2 = resp.data[1].embedding
 
 model = os.getenv("LLM_MODEL_ID")
 
