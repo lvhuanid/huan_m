@@ -2,8 +2,7 @@ import os
 from openai import OpenAI
 import json
 from dotenv import load_dotenv
-import instructor
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
 
 
 load_dotenv()
@@ -28,12 +27,12 @@ client = OpenAI(
 #     input=["今天天气真好", "下雨了，好冷"]
 # )
 
-prompt = """
-从以下文本中提取人名、公司和职位，以 JSON 格式返回。
-只返回 JSON，不要任何解释。
-文本：王小蒙在北京智源科技有限公司担任算法工程师。
-输出格式示例：{"name": "...", "company": "...", "position": "..."}
-"""
+# prompt = """
+# 从以下文本中提取人名、公司和职位，以 JSON 格式返回。
+# 只返回 JSON，不要任何解释。
+# 文本：王小蒙在北京智源科技有限公司担任算法工程师。
+# 输出格式示例：{"name": "...", "company": "...", "position": "..."}
+# """
 
 # response = client.chat.completions.create(
 #     model=model,
@@ -55,18 +54,32 @@ class PersonInfo(BaseModel):
     position: str
     skills: list[str]
 
-client = instructor.from_openai(OpenAI(
-    api_key=os.getenv("MODELSCOPE_API_KEY"),
-    base_url=os.getenv("LLM_BASE_URL")
-))
+prompt = """
+从文本中提取人物信息，返回一个 JSON 对象，包含字段 name, company, position, skills。
+只返回 JSON，不要额外解释。
+文本：张三在腾讯担任前端工程师，擅长 React 和 TypeScript。
+"""
 
-# 让模型抽取
-info = client.chat.completions.create(
+response = client.chat.completions.create(
     model=model,
-    response_model=PersonInfo,
-    messages=[{"role": "user", "content": "张三在腾讯担任前端工程师，擅长 React 和 TypeScript。"}],
+    messages=[{"role": "user", "content": prompt}],
+    temperature=0,
+    response_format={"type": "json_object"}   # 强制 JSON 输出
 )
-print(info.name)        # 张三
-print(info.skills)
 
-# No completion choices found in LLM response (mode: Mode.TOOLS)
+# 获取返回的字符串并解析
+raw = response.choices[0].message.content
+
+# 有时候模型会包一层 ```json ... ```，需要去除
+if "```json" in raw:
+    raw = raw.split("```json")[1].split("```")[0].strip()
+
+data = json.loads(raw)
+
+# 用 Pydantic 验证和实例化
+try:
+    info = PersonInfo(**data)
+    print(info.name)    # 张三
+    print(info.skills)  # ['React', 'TypeScript']
+except ValidationError as e:
+    print("输出不符合预设结构:", e)
