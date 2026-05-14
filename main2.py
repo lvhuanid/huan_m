@@ -34,8 +34,9 @@ prompt = """
 
 response = client.chat.completions.create(
     model=model,
-    messages=[{"role": "user", "content": prompt}],
-    temperature=0,  # 结构化提取设为 0
+     messages=[{"role": "user", "content": prompt}],
+    temperature=0,
+    response_format={"type": "json_object"}
 )
 
 content = response.choices[0].message.content
