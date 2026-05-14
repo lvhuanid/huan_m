@@ -21,31 +21,44 @@ client = OpenAI(
 
 model = os.getenv("LLM_MODEL_ID")
 
-response = client.chat.completions.create(
-    model=model,
-    messages=[
-        {"role": "system", "content": "你是一个乐于助人的助手"},
-        {"role": "user", "content": "你好，请用一句话介绍你自己"}
-    ],
-    temperature=0.7,
-    max_tokens=100
-)
+# response = client.chat.completions.create(
+#     model=model,
+#     messages=[
+#         {"role": "system", "content": "你是一个乐于助人的助手"},
+#         {"role": "user", "content": "你好，请用一句话介绍你自己"}
+#     ],
+#     temperature=0.7,
+#     max_tokens=100
+# )
 
-# temperature=0 → 输出严谨、逻辑化
-# temperature=1.5 → 更发散，可能会有比喻或脑洞
-# max_tokens=50 → 话说一半就被截断
+# # temperature=0 → 输出严谨、逻辑化
+# # temperature=1.5 → 更发散，可能会有比喻或脑洞
+# # max_tokens=50 → 话说一半就被截断
 
-print(response.choices[0].message.content)
+# print(response.choices[0].message.content)
 
 messages = [{"role": "system", "content": "你是儿童科普老师，回答要简单有趣"}]
 while True:
     user_input = input("你: ")
     messages.append({"role": "user", "content": user_input})
-    response = client.chat.completions.create(
+    stream = client.chat.completions.create(
         model=model,
         messages=messages,
-        temperature=0.8
+        temperature=0.8,
+        stream=True
     )
-    assistant_reply = response.choices[0].message.content
-    print(f"AI: {assistant_reply}")
-    messages.append({"role": "assistant", "content": assistant_reply})
+    for chunk in stream:
+        delta = chunk.choices[0].delta
+        if delta.content:
+            print(delta.content, end='', flush=True)
+
+    # Traceback (most recent call last):
+    # File "/Users/huan/dev/llm/main1.py", line 51, in <module>
+    #     delta = chunk.choices[0].delta
+    #             ~~~~~~~~~~~~~^^^
+    # IndexError: list index out of range
+
+    # print(f"AI: {assistant_reply}")
+    # messages.append({"role": "assistant", "content": assistant_reply})
+
+
