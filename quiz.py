@@ -17,8 +17,19 @@ def load_words(data_file):
     with open(data_file, "r", encoding="utf-8") as f:
         return json.load(f)
 
+def get_quiz_dir():
+    """返回固定存储目录 ~/.quiz，若不存在则创建"""
+    quiz_dir = os.path.expanduser("~/.quiz")
+    os.makedirs(quiz_dir, exist_ok=True)
+    return quiz_dir
+
+
 def get_error_file():
-    return "errors.json"
+    return os.path.join(get_quiz_dir(), "errors.json")
+
+def get_progress_file():
+    return os.path.join(get_quiz_dir(), "progress.json")
+
 
 def init_error_session():
     """
@@ -64,8 +75,6 @@ def add_error_word(session_index, en, zh):
         with open(error_file, "w", encoding="utf-8") as f:
             json.dump(sessions, f, ensure_ascii=False, indent=2)
 
-def get_progress_file():
-    return "progress.json"
 
 def load_progress():
     prog_file = get_progress_file()
