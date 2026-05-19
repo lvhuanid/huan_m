@@ -88,13 +88,13 @@ def input_word_until_correct(en, zh, session_index, error_set):
             raise
 
         # 跳过
-        if char.lower() == 's' and user_input == '':
-            click.echo()
-            click.echo(en.strip())
-            if en not in error_set:
-                error_set.add(en)
-                add_error_word(session_index, en.strip(), zh, "[SKIP]")
-            return
+        # if char.lower() == 's' and user_input == '':
+        #     click.echo()
+        #     click.echo(en.strip())
+        #     if en not in error_set:
+        #         error_set.add(en)
+        #         add_error_word(session_index, en.strip(), zh, "[SKIP]")
+        #     return
 
         # 回车
         if char in ('\n', '\r'):
