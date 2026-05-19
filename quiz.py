@@ -87,16 +87,7 @@ def input_word_until_correct(en, zh, session_index, error_set):
         except KeyboardInterrupt:
             raise
 
-        # 跳过
-        # if char.lower() == 's' and user_input == '':
-        #     click.echo()
-        #     click.echo(en.strip())
-        #     if en not in error_set:
-        #         error_set.add(en)
-        #         add_error_word(session_index, en.strip(), zh, "[SKIP]")
-        #     return
 
-        # 回车
         if char in ('\n', '\r'):
             if user_input.lower() == target_lower:
                 click.echo()
@@ -110,17 +101,14 @@ def input_word_until_correct(en, zh, session_index, error_set):
                 user_input = ""
                 continue
 
-        # 退格
         elif char in ('\x7f', '\b'):
             if user_input:
                 user_input = user_input[:-1]
                 click.echo('\b \b', nl=False)
 
-        # Ctrl+C
         elif char == '\x03':
             raise KeyboardInterrupt()
 
-        # 普通字符
         elif char.isprintable():
             user_input += char
             click.echo(char, nl=False)
@@ -136,11 +124,6 @@ def input_word_review(en, zh):
             char = click.getchar(echo=False)
         except KeyboardInterrupt:
             raise
-
-        if char.lower() == 's' and user_input == '':
-            click.echo()
-            click.echo(en.strip())
-            return
 
         if char in ('\n', '\r'):
             if user_input.lower() == target_lower:
@@ -221,7 +204,6 @@ def learn(file, start, word):
             click.echo(f"从上次结束位置继续（第 {start_idx+1} 个）。")
 
     click.echo(f"共 {total} 个单词，从第 {start_idx+1} 个开始，按 Ctrl+C 退出。")
-    click.echo("（输入为空时按 S 键跳过当前单词）\n")
 
     session_index = [None]
     error_set = set()
@@ -286,7 +268,6 @@ def review(session_time):
         return
 
     click.echo(f"开始复习 {len(words)} 个错题（记录时间：{target_session['time']}）。")
-    click.echo("（输入为空时按 S 键跳过当前单词）\n")
 
     for w in words:
         zh = w["zh"].strip().replace("\r", "")
@@ -296,14 +277,14 @@ def review(session_time):
 
     click.echo("\n🎉 错题复习完成！")
 
-# ---------- browse（翻阅单词） ----------
+# ---------- browse（翻阅 + 拼写） ----------
 @cli.command()
 @click.option("-f", "--file", default=None, type=click.Path(dir_okay=False),
               help="自定义单词 JSON 文件（默认内置 a.json）")
 @click.option("--start", type=int, default=0, help="起始索引（默认 0）")
 @click.option("--page", type=int, default=100, help="每页显示的单词数量（默认 100）")
 def browse(file, start, page):
-    """翻阅单词表，每页显示指定数量，按任意键翻页，q 退出"""
+    """翻阅单词表，每页显示指定数量，按 S 键拼写本页，按 Q 退出"""
     if file is None:
         data_file = get_data_path("a.json")
     else:
@@ -322,7 +303,6 @@ def browse(file, start, page):
     idx = start if start >= 0 and start < total else 0
 
     while idx < total:
-        # 清除屏幕（可选，便于阅读）
         click.clear()
         click.echo(f"📖 单词表（{idx+1}-{min(idx+page, total)} / {total}）")
         click.echo("-" * 50)
@@ -333,7 +313,7 @@ def browse(file, start, page):
             click.echo(f"{i+1:4d}. {en:<20} {zh_clean}")
 
         click.echo("-" * 50)
-        click.echo("按任意键继续翻页，按 q 退出...", nl=False)
+        click.echo("[S] 拼写本页  [任意键] 翻页  [Q] 退出", nl=False)
 
         try:
             key = click.getchar()
@@ -344,6 +324,27 @@ def browse(file, start, page):
         if key.lower() == 'q':
             click.echo("\n已退出翻阅。")
             return
+        elif key.lower() == 's':
+            # 开始拼写本页单词
+            page_words = words[idx: min(idx+page, total)]
+            click.echo("\n开始拼写本页单词...\n")
+            session_index = [None]   # 新建错误记录 session
+            error_set = set()
+
+            for en, zh in page_words:
+                zh_clean = zh.strip().replace("\r", "")
+                click.echo(zh_clean)
+                input_word_until_correct(en, zh_clean, session_index, error_set)
+
+            if error_set:
+                click.echo("\n⚠️  本页答错的单词：")
+                for e, z in [(x[0].strip(), x[1].strip().replace("\r", "")) for x in page_words if x[0].strip() in error_set]:
+                    click.echo(f"  {e}  {z}")
+            else:
+                click.echo("\n🎉 本页全部正确！")
+
+            click.echo("（错误已记录到 errors.json）")
+            idx += page   # 拼写完成后自动翻到下一页
         else:
             idx += page
 
