@@ -76,6 +76,27 @@ def save_progress(index):
     with open(get_progress_file(), "w", encoding="utf-8") as f:
         json.dump({"index": index}, f)
 
+# ---------- 句子进度管理 ----------
+def get_sent_progress_file():
+    return os.path.join(get_quiz_dir(), "sent_progress.json")
+
+def load_sent_progress():
+    prog_file = get_sent_progress_file()
+    try:
+        if os.path.exists(prog_file):
+            with open(prog_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            idx = data.get("index", 0)
+            if isinstance(idx, int) and idx >= 0:
+                return idx
+    except:
+        pass
+    return 0
+
+def save_sent_progress(index):
+    with open(get_sent_progress_file(), "w", encoding="utf-8") as f:
+        json.dump({"index": index}, f)
+
 # ---------- 核心输入函数（含跳过） ----------
 def input_word_until_correct(en, zh, session_index, error_set):
     target_lower = en.strip().lower()
@@ -149,6 +170,88 @@ def input_word_review(en, zh):
             if user_input.lower() == target_lower:
                 click.echo()
                 return
+
+def input_sentence_until_correct(en, cn, session_index, error_set):
+    """显示中英文句子，等待用户输入正确英文后通过"""
+    target_lower = en.strip().lower()
+    user_input = ""
+
+    while True:
+        try:
+            char = click.getchar(echo=False)
+        except KeyboardInterrupt:
+            raise
+
+        if char in ('\n', '\r'):
+            if user_input.lower() == target_lower:
+                click.echo()
+                return
+            else:
+                click.echo()
+                click.echo(f"  {en.strip()}")
+                if en not in error_set:
+                    error_set.add(en)
+                    add_error_word(session_index, en.strip(), cn, user_input)
+                user_input = ""
+                continue
+
+        elif char in ('\x7f', '\b'):
+            if user_input:
+                user_input = user_input[:-1]
+                click.echo('\b \b', nl=False)
+
+        elif char == '\x03':
+            raise KeyboardInterrupt()
+
+        elif char.isprintable():
+            user_input += char
+            click.echo(char, nl=False)
+            if user_input.lower() == target_lower:
+                click.echo()
+                return
+
+def input_sentence_bsent(en, cn, session_index, error_set):
+    """打句子模式（浏览中），返回 False 表示用户按 Esc 退出打字"""
+    target_lower = en.strip().lower()
+    user_input = ""
+
+    while True:
+        try:
+            char = click.getchar(echo=False)
+        except KeyboardInterrupt:
+            raise
+
+        if char == '\x1b':
+            click.echo()
+            return False
+
+        if char in ('\n', '\r'):
+            if user_input.lower() == target_lower:
+                click.echo()
+                return True
+            else:
+                click.echo()
+                click.echo(f"  {en.strip()}")
+                if en not in error_set:
+                    error_set.add(en)
+                    add_error_word(session_index, en.strip(), cn, user_input)
+                user_input = ""
+                continue
+
+        elif char in ('\x7f', '\b'):
+            if user_input:
+                user_input = user_input[:-1]
+                click.echo('\b \b', nl=False)
+
+        elif char == '\x03':
+            raise KeyboardInterrupt()
+
+        elif char.isprintable():
+            user_input += char
+            click.echo(char, nl=False)
+            if user_input.lower() == target_lower:
+                click.echo()
+                return True
 
 # ---------- 命令组 ----------
 @click.group()
@@ -228,6 +331,83 @@ def learn(file, start, word):
     if start_idx + (total - start_idx) >= total:
         save_progress(0)
         click.echo("已完成全部单词，进度已重置。")
+    click.echo("学习结束。")
+
+# ---------- sent ----------
+@cli.command()
+@click.option("-f", "--file", default=None, type=click.Path(dir_okay=False),
+              help="自定义句子 JSON 文件（默认内置 sentences.json）")
+@click.option("--start", type=int, default=None, help="起始索引（0 为第一个）")
+@click.option("--word", type=str, default=None, help="从指定英文句子开始")
+def sent(file, start, word):
+    """学习英语句子：显示中英文，输入正确英文后进入下一个"""
+    if file is None:
+        data_file = get_data_path("sentences.json")
+    else:
+        data_file = file
+        if not os.path.isfile(data_file):
+            raise click.BadParameter(f"文件不存在: {data_file}")
+
+    with open(data_file, "r", encoding="utf-8") as f:
+        sentences = json.load(f)
+
+    if not sentences:
+        click.echo("没有找到任何句子，退出。")
+        return
+
+    total = len(sentences)
+
+    if word is not None:
+        found_idx = None
+        for i, s in enumerate(sentences):
+            if s["en"].strip().lower() == word.strip().lower():
+                found_idx = i
+                break
+        if found_idx is None:
+            click.echo(f"错误：句子列表中未找到 '{word}'")
+            return
+        start_idx = found_idx
+    elif start is not None:
+        start_idx = start
+        if start_idx < 0 or start_idx >= total:
+            click.echo(f"错误：起始索引 {start_idx} 超出范围 (0~{total-1})")
+            return
+    else:
+        start_idx = load_sent_progress()
+        if start_idx >= total:
+            click.echo("已完成全部句子，从头开始。")
+            start_idx = 0
+        elif start_idx > 0:
+            click.echo(f"从上次结束位置继续（第 {start_idx+1} 个）。")
+
+    click.echo(f"共 {total} 个句子，从第 {start_idx+1} 个开始，按 Ctrl+C 退出。")
+
+    session_index = [None]
+    error_set = set()
+
+    for idx in range(start_idx, total):
+        s = sentences[idx]
+        en = s["en"].strip()
+        cn = s["cn"].strip().replace("\r", "")
+        click.echo(f"\n{en}")
+        click.echo(f"{cn}")
+        input_sentence_until_correct(en, cn, session_index, error_set)
+        save_sent_progress(idx + 1)
+
+    if error_set:
+        click.echo("\n⚠️  本次答错的句子：")
+        for s in sentences:
+            en = s["en"].strip()
+            cn = s["cn"].strip().replace("\r", "")
+            if en in error_set:
+                click.echo(f"  {en}  {cn}")
+        click.echo("（错误已记录到 errors.json）")
+    else:
+        click.echo("\n🎉 全部正确！")
+
+    if start_idx + (total - start_idx) >= total:
+        save_sent_progress(0)
+        click.echo("已完成全部句子，进度已重置。")
     click.echo("学习结束。")
 
 # ---------- review ----------
@@ -350,6 +530,95 @@ def browse(file, start, page):
 
     click.echo("\n已是最后一页。")
 
+# ---------- bsent（翻阅句子 + 打句子） ----------
+@cli.command()
+@click.option("-f", "--file", default=None, type=click.Path(dir_okay=False),
+              help="自定义句子 JSON 文件（默认内置 sentences.json）")
+@click.option("--start", type=int, default=0, help="起始索引（默认 0）")
+@click.option("--page", type=int, default=50, help="每页显示的句子数量（默认 20）")
+def bsent(file, start, page):
+    """翻阅句子表，每页显示指定数量，按 S 键打本页句子，按 Q 退出"""
+    if file is None:
+        data_file = get_data_path("sentences.json")
+    else:
+        data_file = file
+        if not os.path.isfile(data_file):
+            raise click.BadParameter(f"文件不存在: {data_file}")
+
+    with open(data_file, "r", encoding="utf-8") as f:
+        sentences = json.load(f)
+
+    if not sentences:
+        click.echo("没有找到任何句子。")
+        return
+
+    total = len(sentences)
+    idx = start if start >= 0 and start < total else 0
+
+    while idx < total:
+        click.clear()
+        click.echo(f"📖 句子表（{idx+1}-{min(idx+page, total)} / {total}）")
+        click.echo("-" * 60)
+
+        for i in range(idx, min(idx+page, total)):
+            s = sentences[i]
+            en = s["en"].strip()
+            cn = s["cn"].strip().replace("\r", "")
+            click.echo(f"{i+1:4d}. {en}")
+            click.echo(f"     {cn}")
+
+        click.echo("-" * 60)
+        click.echo("[S] 打句子  [任意键] 翻页  [Q] 退出", nl=False)
+
+        try:
+            key = click.getchar()
+        except KeyboardInterrupt:
+            click.echo("\n已退出。")
+            return
+
+        if key.lower() == 'q':
+            click.echo("\n已退出翻阅。")
+            return
+        elif key.lower() == 's':
+            # 开始打本页句子
+            page_sentences = sentences[idx: min(idx+page, total)]
+            click.echo("\n开始打本页句子...\n")
+            click.echo("（按 Esc 可退出打字，回到浏览）\n")
+            session_index = [None]
+            error_set = set()
+
+            for s in page_sentences:
+                en = s["en"].strip()
+                cn = s["cn"].strip().replace("\r", "")
+                click.echo(f"{en}")
+                click.echo(f"{cn}")
+                if not input_sentence_bsent(en, cn, session_index, error_set):
+                    click.echo("\n已退出打字，回到浏览。\n")
+                    break  # 用户按 Esc 退出，回到浏览（留在当前页）
+            else:
+                # 正常完成本页所有句子
+                if error_set:
+                    click.echo("\n⚠️  本页答错的句子：")
+                    for s in page_sentences:
+                        en = s["en"].strip()
+                        cn = s["cn"].strip().replace("\r", "")
+                        if en in error_set:
+                            click.echo(f"  {en}")
+                            click.echo(f"  {cn}")
+                else:
+                    click.echo("\n🎉 本页全部正确！")
+
+                click.echo("（错误已记录到 errors.json）")
+                idx += page  # 拼写完成后自动翻到下一页
+                continue
+
+            # 用户中途退出打字，留在当前页
+            continue
+        else:
+            idx += page
+
+    click.echo("\n已是最后一页。")
+
 # ---------- 入口 ----------
 if __name__ == "__main__":
     try:
@@ -357,7 +626,7 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         click.echo("\n已退出。")
         sys.exit(0)
-    # pyinstaller --onefile --add-data "a.json:." quiz.py
+    # uv run pyinstaller --onefile --add-data "a.json:." --add-data "sentences.json:." quiz.py 2>&1
     # sudo cp dist/quiz /usr/local/bin/
     # sudo chmod +x /usr/local/bin/quiz
     # quiz
