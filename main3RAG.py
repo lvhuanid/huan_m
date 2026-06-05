@@ -3,7 +3,6 @@ from openai import OpenAI
 from dotenv import load_dotenv
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 import chromadb
-from chromadb.config import Settings
 
 
 

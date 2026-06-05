@@ -1,0 +1,8 @@
+/build
+**/chroma_db
+/.env
+/.venv
+**/__pycache__/
+**/dist
+.DS_Store
+.pyproject

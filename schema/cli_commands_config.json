@@ -1,0 +1,3391 @@
+[
+    {
+        "parent": "display",
+        "command": "interface",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface",
+        "help_text": "The list of named interfaces on the device",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface",
+        "table_title": "The list of named interfaces on the device",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Type",
+                "relative_path": "state/type",
+                "width": 15,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Name",
+                "relative_path": "state/name",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Mtu",
+                "relative_path": "state/mtu",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Loopback Mode",
+                "relative_path": "state/loopback-mode",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Ospf Enabled",
+                "relative_path": "state/ospf-enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Description",
+                "relative_path": "state/description",
+                "width": 30,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Enabled",
+                "relative_path": "state/enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Ifindex",
+                "relative_path": "state/ifindex",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Admin Status",
+                "relative_path": "state/admin-status",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Oper Status",
+                "relative_path": "state/oper-status",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Last Change",
+                "relative_path": "state/last-change",
+                "width": 12,
+                "align": "right",
+                "unit": "nanoseconds"
+            },
+            {
+                "label": "Logical",
+                "relative_path": "state/logical",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Counters In Octets",
+                "relative_path": "state/counters/in-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Pkts",
+                "relative_path": "state/counters/in-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Unicast Pkts",
+                "relative_path": "state/counters/in-unicast-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Broadcast Pkts",
+                "relative_path": "state/counters/in-broadcast-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Multicast Pkts",
+                "relative_path": "state/counters/in-multicast-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Discards",
+                "relative_path": "state/counters/in-discards",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Errors",
+                "relative_path": "state/counters/in-errors",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Unknown Protos",
+                "relative_path": "state/counters/in-unknown-protos",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Fcs Errors",
+                "relative_path": "state/counters/in-fcs-errors",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Octets",
+                "relative_path": "state/counters/out-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Pkts",
+                "relative_path": "state/counters/out-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Unicast Pkts",
+                "relative_path": "state/counters/out-unicast-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Broadcast Pkts",
+                "relative_path": "state/counters/out-broadcast-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Multicast Pkts",
+                "relative_path": "state/counters/out-multicast-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Discards",
+                "relative_path": "state/counters/out-discards",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Errors",
+                "relative_path": "state/counters/out-errors",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Carrier Transitions",
+                "relative_path": "state/counters/carrier-transitions",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Last Clear",
+                "relative_path": "state/counters/last-clear",
+                "width": 12,
+                "align": "right",
+                "unit": "nanoseconds"
+            },
+            {
+                "label": "Hardware Port",
+                "relative_path": "state/hardware-port",
+                "width": 10,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Transceiver",
+                "relative_path": "state/transceiver",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Tpid",
+                "relative_path": "state/tpid",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "hold-time",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/hold-time",
+        "help_text": "Top-level container for hold-time settings to enable\ndampening advertisements of interface transitions",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/hold-time",
+        "table_title": "Top-level container for hold-time settings to enable\ndampening advertisements of interface transitions",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Up",
+                "relative_path": "state/up",
+                "width": 12,
+                "align": "right",
+                "unit": "milliseconds"
+            },
+            {
+                "label": "Down",
+                "relative_path": "state/down",
+                "width": 12,
+                "align": "right",
+                "unit": "milliseconds"
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "subinterface",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface",
+        "help_text": "The list of subinterfaces (logical interfaces) associated\nwith a physical interface",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface",
+        "table_title": "The list of subinterfaces (logical interfaces) associated\nwith a physical interface",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Index",
+                "relative_path": "state/index",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Description",
+                "relative_path": "state/description",
+                "width": 30,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Enabled",
+                "relative_path": "state/enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Name",
+                "relative_path": "state/name",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Ifindex",
+                "relative_path": "state/ifindex",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Admin Status",
+                "relative_path": "state/admin-status",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Oper Status",
+                "relative_path": "state/oper-status",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Last Change",
+                "relative_path": "state/last-change",
+                "width": 12,
+                "align": "right",
+                "unit": "nanoseconds"
+            },
+            {
+                "label": "Logical",
+                "relative_path": "state/logical",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Counters In Octets",
+                "relative_path": "state/counters/in-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Pkts",
+                "relative_path": "state/counters/in-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Unicast Pkts",
+                "relative_path": "state/counters/in-unicast-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Broadcast Pkts",
+                "relative_path": "state/counters/in-broadcast-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Multicast Pkts",
+                "relative_path": "state/counters/in-multicast-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Discards",
+                "relative_path": "state/counters/in-discards",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Errors",
+                "relative_path": "state/counters/in-errors",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Unknown Protos",
+                "relative_path": "state/counters/in-unknown-protos",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Fcs Errors",
+                "relative_path": "state/counters/in-fcs-errors",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Octets",
+                "relative_path": "state/counters/out-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Pkts",
+                "relative_path": "state/counters/out-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Unicast Pkts",
+                "relative_path": "state/counters/out-unicast-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Broadcast Pkts",
+                "relative_path": "state/counters/out-broadcast-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Multicast Pkts",
+                "relative_path": "state/counters/out-multicast-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Discards",
+                "relative_path": "state/counters/out-discards",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Errors",
+                "relative_path": "state/counters/out-errors",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Carrier Transitions",
+                "relative_path": "state/counters/carrier-transitions",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Last Clear",
+                "relative_path": "state/counters/last-clear",
+                "width": 12,
+                "align": "right",
+                "unit": "nanoseconds"
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "ipv4",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv4",
+        "help_text": "Parameters for the IPv4 address family",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv4",
+        "table_title": "Parameters for the IPv4 address family",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Enabled",
+                "relative_path": "state/enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Mtu",
+                "relative_path": "state/mtu",
+                "width": 12,
+                "align": "right",
+                "unit": "octets"
+            },
+            {
+                "label": "Dhcp Client",
+                "relative_path": "state/dhcp-client",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Counters In Pkts",
+                "relative_path": "state/counters/in-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Octets",
+                "relative_path": "state/counters/in-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Error Pkts",
+                "relative_path": "state/counters/in-error-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Forwarded Pkts",
+                "relative_path": "state/counters/in-forwarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Forwarded Octets",
+                "relative_path": "state/counters/in-forwarded-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Discarded Pkts",
+                "relative_path": "state/counters/in-discarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Pkts",
+                "relative_path": "state/counters/out-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Octets",
+                "relative_path": "state/counters/out-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Error Pkts",
+                "relative_path": "state/counters/out-error-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Forwarded Pkts",
+                "relative_path": "state/counters/out-forwarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Forwarded Octets",
+                "relative_path": "state/counters/out-forwarded-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Discarded Pkts",
+                "relative_path": "state/counters/out-discarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "address",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv4/addresses/address",
+        "help_text": "The list of configured IPv4 addresses on the interface",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv4/addresses/address",
+        "table_title": "The list of configured IPv4 addresses on the interface",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Ip",
+                "relative_path": "state/ip",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Prefix Length",
+                "relative_path": "state/prefix-length",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Unnumbered",
+                "relative_path": "state/unnumbered",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Origin",
+                "relative_path": "state/origin",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "vrrp-group",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv4/addresses/address/vrrp/vrrp-group",
+        "help_text": "List of VRRP groups, keyed by virtual router id",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv4/addresses/address/vrrp/vrrp-group",
+        "table_title": "List of VRRP groups, keyed by virtual router id",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Virtual Router Id",
+                "relative_path": "state/virtual-router-id",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Priority",
+                "relative_path": "state/priority",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Preempt",
+                "relative_path": "state/preempt",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Preempt Delay",
+                "relative_path": "state/preempt-delay",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Accept Mode",
+                "relative_path": "state/accept-mode",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Advertisement Interval",
+                "relative_path": "state/advertisement-interval",
+                "width": 20,
+                "align": "right",
+                "unit": "centiseconds"
+            },
+            {
+                "label": "Current Priority",
+                "relative_path": "state/current-priority",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "interface-tracking",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv4/addresses/address/vrrp/vrrp-group/interface-tracking",
+        "help_text": "Top-level container for VRRP interface tracking",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv4/addresses/address/vrrp/vrrp-group/interface-tracking",
+        "table_title": "Top-level container for VRRP interface tracking",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Priority Decrement",
+                "relative_path": "state/priority-decrement",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "proxy-arp",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv4/proxy-arp",
+        "help_text": "Configuration and operational state parameters\nrelating to proxy ARP",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv4/proxy-arp",
+        "table_title": "Configuration and operational state parameters\nrelating to proxy ARP",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Mode",
+                "relative_path": "state/mode",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "neighbor",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv4/neighbors/neighbor",
+        "help_text": "A list of mappings from IPv4 addresses to\nlink-layer addresses",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv4/neighbors/neighbor",
+        "table_title": "A list of mappings from IPv4 addresses to\nlink-layer addresses",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Ip",
+                "relative_path": "state/ip",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Link Layer Address",
+                "relative_path": "state/link-layer-address",
+                "width": 40,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Origin",
+                "relative_path": "state/origin",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "unnumbered",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv4/unnumbered",
+        "help_text": "Top-level container for setting unnumbered interfaces",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv4/unnumbered",
+        "table_title": "Top-level container for setting unnumbered interfaces",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Enabled",
+                "relative_path": "state/enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "interface-ref",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv4/unnumbered/interface-ref",
+        "help_text": "Reference to an interface or subinterface",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv4/unnumbered/interface-ref",
+        "table_title": "Reference to an interface or subinterface",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Interface",
+                "relative_path": "state/interface",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Subinterface",
+                "relative_path": "state/subinterface",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "ipv6",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv6",
+        "help_text": "Parameters for the IPv6 address family",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv6",
+        "table_title": "Parameters for the IPv6 address family",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Enabled",
+                "relative_path": "state/enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Mtu",
+                "relative_path": "state/mtu",
+                "width": 12,
+                "align": "right",
+                "unit": "octets"
+            },
+            {
+                "label": "Dup Addr Detect Transmits",
+                "relative_path": "state/dup-addr-detect-transmits",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Dhcp Client",
+                "relative_path": "state/dhcp-client",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Counters In Pkts",
+                "relative_path": "state/counters/in-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Octets",
+                "relative_path": "state/counters/in-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Error Pkts",
+                "relative_path": "state/counters/in-error-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Forwarded Pkts",
+                "relative_path": "state/counters/in-forwarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Forwarded Octets",
+                "relative_path": "state/counters/in-forwarded-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Discarded Pkts",
+                "relative_path": "state/counters/in-discarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Pkts",
+                "relative_path": "state/counters/out-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Octets",
+                "relative_path": "state/counters/out-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Error Pkts",
+                "relative_path": "state/counters/out-error-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Forwarded Pkts",
+                "relative_path": "state/counters/out-forwarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Forwarded Octets",
+                "relative_path": "state/counters/out-forwarded-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Discarded Pkts",
+                "relative_path": "state/counters/out-discarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "address",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/addresses/address",
+        "help_text": "The list of configured IPv6 addresses on the interface",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/addresses/address",
+        "table_title": "The list of configured IPv6 addresses on the interface",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Ip",
+                "relative_path": "state/ip",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Prefix Length",
+                "relative_path": "state/prefix-length",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Origin",
+                "relative_path": "state/origin",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Status",
+                "relative_path": "state/status",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "vrrp-group",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/addresses/address/vrrp/vrrp-group",
+        "help_text": "List of VRRP groups, keyed by virtual router id",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/addresses/address/vrrp/vrrp-group",
+        "table_title": "List of VRRP groups, keyed by virtual router id",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Virtual Router Id",
+                "relative_path": "state/virtual-router-id",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Priority",
+                "relative_path": "state/priority",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Preempt",
+                "relative_path": "state/preempt",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Preempt Delay",
+                "relative_path": "state/preempt-delay",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Accept Mode",
+                "relative_path": "state/accept-mode",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Advertisement Interval",
+                "relative_path": "state/advertisement-interval",
+                "width": 20,
+                "align": "right",
+                "unit": "centiseconds"
+            },
+            {
+                "label": "Current Priority",
+                "relative_path": "state/current-priority",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Virtual Link Local",
+                "relative_path": "state/virtual-link-local",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "interface-tracking",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/addresses/address/vrrp/vrrp-group/interface-tracking",
+        "help_text": "Top-level container for VRRP interface tracking",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/addresses/address/vrrp/vrrp-group/interface-tracking",
+        "table_title": "Top-level container for VRRP interface tracking",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Priority Decrement",
+                "relative_path": "state/priority-decrement",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "router-advertisement",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/router-advertisement",
+        "help_text": "Configuration and operational state parameters relating to\nrouter advertisements",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/router-advertisement",
+        "table_title": "Configuration and operational state parameters relating to\nrouter advertisements",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Interval",
+                "relative_path": "state/interval",
+                "width": 20,
+                "align": "right",
+                "unit": "seconds"
+            },
+            {
+                "label": "Lifetime",
+                "relative_path": "state/lifetime",
+                "width": 20,
+                "align": "right",
+                "unit": "seconds"
+            },
+            {
+                "label": "Suppress",
+                "relative_path": "state/suppress",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "neighbor",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/neighbors/neighbor",
+        "help_text": "List of IPv6 neighbors",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/neighbors/neighbor",
+        "table_title": "List of IPv6 neighbors",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Ip",
+                "relative_path": "state/ip",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Link Layer Address",
+                "relative_path": "state/link-layer-address",
+                "width": 40,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Origin",
+                "relative_path": "state/origin",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Is Router",
+                "relative_path": "state/is-router",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Neighbor State",
+                "relative_path": "state/neighbor-state",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "unnumbered",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/unnumbered",
+        "help_text": "Top-level container for setting unnumbered interfaces",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/unnumbered",
+        "table_title": "Top-level container for setting unnumbered interfaces",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Enabled",
+                "relative_path": "state/enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "interface-ref",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/unnumbered/interface-ref",
+        "help_text": "Reference to an interface or subinterface",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/unnumbered/interface-ref",
+        "table_title": "Reference to an interface or subinterface",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Interface",
+                "relative_path": "state/interface",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Subinterface",
+                "relative_path": "state/subinterface",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "autoconf",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/openconfig-if-ip-ext:autoconf",
+        "help_text": "Top-level container for IPv6 autoconf",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-if-ip:ipv6/openconfig-if-ip-ext:autoconf",
+        "table_title": "Top-level container for IPv6 autoconf",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Create Global Addresses",
+                "relative_path": "state/create-global-addresses",
+                "width": 40,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Create Temporary Addresses",
+                "relative_path": "state/create-temporary-addresses",
+                "width": 40,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Temporary Valid Lifetime",
+                "relative_path": "state/temporary-valid-lifetime",
+                "width": 12,
+                "align": "right",
+                "unit": "seconds"
+            },
+            {
+                "label": "Temporary Preferred Lifetime",
+                "relative_path": "state/temporary-preferred-lifetime",
+                "width": 20,
+                "align": "right",
+                "unit": "seconds"
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "vlan",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-vlan:vlan",
+        "help_text": "Enclosing container for VLAN interface-specific\ndata on subinterfaces",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-vlan:vlan",
+        "table_title": "Enclosing container for VLAN interface-specific\ndata on subinterfaces",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Vlan Id",
+                "relative_path": "state/vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "single-tagged",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/single-tagged",
+        "help_text": "Match single-tagged packets with an exact VLAN identifier",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/single-tagged",
+        "table_title": "Match single-tagged packets with an exact VLAN identifier",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Vlan Id",
+                "relative_path": "state/vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "single-tagged-range",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/single-tagged-range",
+        "help_text": "Match single-tagged packets with a range of VLAN identifiers",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/single-tagged-range",
+        "table_title": "Match single-tagged packets with a range of VLAN identifiers",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Low Vlan Id",
+                "relative_path": "state/low-vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "High Vlan Id",
+                "relative_path": "state/high-vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "double-tagged",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/double-tagged",
+        "help_text": "Match double-tagged packets against inner exact and outer exact\nVLAN identifiers",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/double-tagged",
+        "table_title": "Match double-tagged packets against inner exact and outer exact\nVLAN identifiers",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Inner Vlan Id",
+                "relative_path": "state/inner-vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Outer Vlan Id",
+                "relative_path": "state/outer-vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "double-tagged-inner-list",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/double-tagged-inner-list",
+        "help_text": "Match double-tagged packets against an inner list and outer exact\nVLAN identifiers",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/double-tagged-inner-list",
+        "table_title": "Match double-tagged packets against an inner list and outer exact\nVLAN identifiers",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Outer Vlan Id",
+                "relative_path": "state/outer-vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "double-tagged-outer-list",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/double-tagged-outer-list",
+        "help_text": "Match double-tagged packets against an inner exact and outer list\nof VLAN identifiers",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/double-tagged-outer-list",
+        "table_title": "Match double-tagged packets against an inner exact and outer list\nof VLAN identifiers",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Inner Vlan Id",
+                "relative_path": "state/inner-vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "double-tagged-inner-range",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/double-tagged-inner-range",
+        "help_text": "Match double-tagged packets against an inner range and outer\nexact VLAN identifiers",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/double-tagged-inner-range",
+        "table_title": "Match double-tagged packets against an inner range and outer\nexact VLAN identifiers",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Inner Low Vlan Id",
+                "relative_path": "state/inner-low-vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Inner High Vlan Id",
+                "relative_path": "state/inner-high-vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "double-tagged-outer-range",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/double-tagged-outer-range",
+        "help_text": "Match double-tagged packets against an inner exact and an outer\nrange of VLAN identifiers",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/double-tagged-outer-range",
+        "table_title": "Match double-tagged packets against an inner exact and an outer\nrange of VLAN identifiers",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Inner Vlan Id",
+                "relative_path": "state/inner-vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Outer Low Vlan Id",
+                "relative_path": "state/outer-low-vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Outer High Vlan Id",
+                "relative_path": "state/outer-high-vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "double-tagged-inner-outer-range",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/double-tagged-inner-outer-range",
+        "help_text": "Match double-tagged packets against an inner range and an outer\nrange of VLAN identifiers",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-vlan:vlan/match/double-tagged-inner-outer-range",
+        "table_title": "Match double-tagged packets against an inner range and an outer\nrange of VLAN identifiers",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Inner Low Vlan Id",
+                "relative_path": "state/inner-low-vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Inner High Vlan Id",
+                "relative_path": "state/inner-high-vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Outer Low Vlan Id",
+                "relative_path": "state/outer-low-vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Outer High Vlan Id",
+                "relative_path": "state/outer-high-vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "ingress-mapping",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-vlan:vlan/ingress-mapping",
+        "help_text": "Ingress VLAN stack behaviors for packets that arrive on\nthis subinterface after their VLAN idenitifer(s) have been\nmatched",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-vlan:vlan/ingress-mapping",
+        "table_title": "Ingress VLAN stack behaviors for packets that arrive on\nthis subinterface after their VLAN idenitifer(s) have been\nmatched",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Vlan Stack Action",
+                "relative_path": "state/vlan-stack-action",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Vlan Id",
+                "relative_path": "state/vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Tpid",
+                "relative_path": "state/tpid",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "egress-mapping",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/subinterfaces/subinterface/openconfig-vlan:vlan/egress-mapping",
+        "help_text": "Egress VLAN and label behaviors for packets that are\ndestined for output via this subinterface",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/subinterfaces/subinterface/openconfig-vlan:vlan/egress-mapping",
+        "table_title": "Egress VLAN and label behaviors for packets that are\ndestined for output via this subinterface",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Vlan Stack Action",
+                "relative_path": "state/vlan-stack-action",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Vlan Id",
+                "relative_path": "state/vlan-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Tpid",
+                "relative_path": "state/tpid",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "otn",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/otn",
+        "help_text": "Show otn information",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/otn",
+        "table_title": "Otn",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Client Als",
+                "relative_path": "state/client-als",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Near End Als",
+                "relative_path": "state/near-end-als",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Als Delay",
+                "relative_path": "state/als-delay",
+                "width": 12,
+                "align": "right",
+                "unit": "milliseconds"
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "sdh",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/sdh",
+        "help_text": "sdh",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/sdh",
+        "table_title": "sdh",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Client Als",
+                "relative_path": "state/client-als",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Near End Als",
+                "relative_path": "state/near-end-als",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Als Delay",
+                "relative_path": "state/als-delay",
+                "width": 12,
+                "align": "right",
+                "unit": "milliseconds"
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "fc",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/fc",
+        "help_text": "fiber channel",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/fc",
+        "table_title": "fiber channel",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Client Als",
+                "relative_path": "state/client-als",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Near End Als",
+                "relative_path": "state/near-end-als",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Als Delay",
+                "relative_path": "state/als-delay",
+                "width": 12,
+                "align": "right",
+                "unit": "milliseconds"
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "aggregation",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-aggregate:aggregation",
+        "help_text": "Options for logical interfaces representing\naggregates",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-aggregate:aggregation",
+        "table_title": "Options for logical interfaces representing\naggregates",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Lag Type",
+                "relative_path": "state/lag-type",
+                "width": 15,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Min Links",
+                "relative_path": "state/min-links",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Lag Speed",
+                "relative_path": "state/lag-speed",
+                "width": 12,
+                "align": "right",
+                "unit": "Mbps"
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "switched-vlan",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-aggregate:aggregation/openconfig-vlan:switched-vlan",
+        "help_text": "Enclosing container for VLAN interface-specific\ndata on Ethernet interfaces",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-aggregate:aggregation/openconfig-vlan:switched-vlan",
+        "table_title": "Enclosing container for VLAN interface-specific\ndata on Ethernet interfaces",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Interface Mode",
+                "relative_path": "state/interface-mode",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Native Vlan",
+                "relative_path": "state/native-vlan",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Access Vlan",
+                "relative_path": "state/access-vlan",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "ethernet",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-ethernet:ethernet",
+        "help_text": "Top-level container for ethernet configuration\nand state",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-ethernet:ethernet",
+        "table_title": "Top-level container for ethernet configuration\nand state",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Mac Address",
+                "relative_path": "state/mac-address",
+                "width": 40,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Auto Negotiate",
+                "relative_path": "state/auto-negotiate",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Duplex Mode",
+                "relative_path": "state/duplex-mode",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Port Speed",
+                "relative_path": "state/port-speed",
+                "width": 10,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Enable Flow Control",
+                "relative_path": "state/enable-flow-control",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Hw Mac Address",
+                "relative_path": "state/hw-mac-address",
+                "width": 40,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Negotiated Duplex Mode",
+                "relative_path": "state/negotiated-duplex-mode",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Negotiated Port Speed",
+                "relative_path": "state/negotiated-port-speed",
+                "width": 10,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Counters Rx Pkts",
+                "relative_path": "state/counters/rx-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Tx Pkts",
+                "relative_path": "state/counters/tx-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Rx Bytes",
+                "relative_path": "state/counters/rx-bytes",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Tx Bytes",
+                "relative_path": "state/counters/tx-bytes",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Rx Crc Err Sum",
+                "relative_path": "state/counters/rx-crc-err-sum",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Rx Stat Osz",
+                "relative_path": "state/counters/rx-stat-osz",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Tx Crc Err Sum",
+                "relative_path": "state/counters/tx-crc-err-sum",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Tx Stat Osz",
+                "relative_path": "state/counters/tx-stat-osz",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Rx Stat Usz",
+                "relative_path": "state/counters/rx-stat-usz",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Tx Stat Usz",
+                "relative_path": "state/counters/tx-stat-usz",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Rx Pkts 64Octets",
+                "relative_path": "state/counters/rx-pkts-64Octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Rx Pkts 65To127Octets",
+                "relative_path": "state/counters/rx-pkts-65to127Octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Rx Pkts 128To255Octets",
+                "relative_path": "state/counters/rx-pkts-128to255Octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Rx Pkts 256To511Octets",
+                "relative_path": "state/counters/rx-pkts-256to511Octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Rx Pkts 512To1023Octets",
+                "relative_path": "state/counters/rx-pkts-512to1023Octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Rx Pkts 1024To1518Octets",
+                "relative_path": "state/counters/rx-pkts-1024to1518Octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Tx Pkts 64Octets",
+                "relative_path": "state/counters/tx-pkts-64Octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Tx Pkts 65To127Octets",
+                "relative_path": "state/counters/tx-pkts-65to127Octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Tx Pkts 128To255Octets",
+                "relative_path": "state/counters/tx-pkts-128to255Octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Tx Pkts 256To511Octets",
+                "relative_path": "state/counters/tx-pkts-256to511Octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Tx Pkts 512To1023Octets",
+                "relative_path": "state/counters/tx-pkts-512to1023Octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Tx Pkts 1024To1518Octets",
+                "relative_path": "state/counters/tx-pkts-1024to1518Octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Rx Err Sum",
+                "relative_path": "state/counters/rx-err-sum",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Aggregate Id",
+                "relative_path": "state/aggregate-id",
+                "width": 12,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Client Als",
+                "relative_path": "state/client-als",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Near End Als",
+                "relative_path": "state/near-end-als",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Als Delay",
+                "relative_path": "state/als-delay",
+                "width": 12,
+                "align": "right",
+                "unit": "milliseconds"
+            },
+            {
+                "label": "Client Fec",
+                "relative_path": "state/client-fec",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "poe",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-ethernet:ethernet/openconfig-if-poe:poe",
+        "help_text": "Top-level container for PoE configuration and state data",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-ethernet:ethernet/openconfig-if-poe:poe",
+        "table_title": "Top-level container for PoE configuration and state data",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Enabled",
+                "relative_path": "state/enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Power Used",
+                "relative_path": "state/power-used",
+                "width": 12,
+                "align": "right",
+                "unit": "Watts"
+            },
+            {
+                "label": "Power Class",
+                "relative_path": "state/power-class",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "switched-vlan",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-ethernet:ethernet/openconfig-vlan:switched-vlan",
+        "help_text": "Enclosing container for VLAN interface-specific\ndata on Ethernet interfaces",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-ethernet:ethernet/openconfig-vlan:switched-vlan",
+        "table_title": "Enclosing container for VLAN interface-specific\ndata on Ethernet interfaces",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Interface Mode",
+                "relative_path": "state/interface-mode",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Native Vlan",
+                "relative_path": "state/native-vlan",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Access Vlan",
+                "relative_path": "state/access-vlan",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "tunnel",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-tunnel:tunnel",
+        "help_text": "In the case that the interface is logical tunnel\ninterface, the parameters for the tunnel are\nspecified within this subtree",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-tunnel:tunnel",
+        "table_title": "In the case that the interface is logical tunnel\ninterface, the parameters for the tunnel are\nspecified within this subtree",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Src",
+                "relative_path": "state/src",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Dst",
+                "relative_path": "state/dst",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Ttl",
+                "relative_path": "state/ttl",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Gre Key",
+                "relative_path": "state/gre-key",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "ipv4",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-tunnel:tunnel/ipv4",
+        "help_text": "Parameters for the IPv4 address family",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-tunnel:tunnel/ipv4",
+        "table_title": "Parameters for the IPv4 address family",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Enabled",
+                "relative_path": "state/enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Mtu",
+                "relative_path": "state/mtu",
+                "width": 12,
+                "align": "right",
+                "unit": "octets"
+            },
+            {
+                "label": "Dhcp Client",
+                "relative_path": "state/dhcp-client",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Counters In Pkts",
+                "relative_path": "state/counters/in-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Octets",
+                "relative_path": "state/counters/in-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Error Pkts",
+                "relative_path": "state/counters/in-error-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Forwarded Pkts",
+                "relative_path": "state/counters/in-forwarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Forwarded Octets",
+                "relative_path": "state/counters/in-forwarded-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Discarded Pkts",
+                "relative_path": "state/counters/in-discarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Pkts",
+                "relative_path": "state/counters/out-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Octets",
+                "relative_path": "state/counters/out-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Error Pkts",
+                "relative_path": "state/counters/out-error-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Forwarded Pkts",
+                "relative_path": "state/counters/out-forwarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Forwarded Octets",
+                "relative_path": "state/counters/out-forwarded-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Discarded Pkts",
+                "relative_path": "state/counters/out-discarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "address",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-tunnel:tunnel/ipv4/addresses/address",
+        "help_text": "The list of configured IPv4 addresses on the interface",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-tunnel:tunnel/ipv4/addresses/address",
+        "table_title": "The list of configured IPv4 addresses on the interface",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Ip",
+                "relative_path": "state/ip",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Prefix Length",
+                "relative_path": "state/prefix-length",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Unnumbered",
+                "relative_path": "state/unnumbered",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Origin",
+                "relative_path": "state/origin",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "proxy-arp",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-tunnel:tunnel/ipv4/proxy-arp",
+        "help_text": "Configuration and operational state parameters\nrelating to proxy ARP",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-tunnel:tunnel/ipv4/proxy-arp",
+        "table_title": "Configuration and operational state parameters\nrelating to proxy ARP",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Mode",
+                "relative_path": "state/mode",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "neighbor",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-tunnel:tunnel/ipv4/neighbors/neighbor",
+        "help_text": "A list of mappings from IPv4 addresses to\nlink-layer addresses",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-tunnel:tunnel/ipv4/neighbors/neighbor",
+        "table_title": "A list of mappings from IPv4 addresses to\nlink-layer addresses",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Ip",
+                "relative_path": "state/ip",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Link Layer Address",
+                "relative_path": "state/link-layer-address",
+                "width": 40,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Origin",
+                "relative_path": "state/origin",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "unnumbered",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-tunnel:tunnel/ipv4/unnumbered",
+        "help_text": "Top-level container for setting unnumbered interfaces",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-tunnel:tunnel/ipv4/unnumbered",
+        "table_title": "Top-level container for setting unnumbered interfaces",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Enabled",
+                "relative_path": "state/enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "interface-ref",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-tunnel:tunnel/ipv4/unnumbered/interface-ref",
+        "help_text": "Reference to an interface or subinterface",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-tunnel:tunnel/ipv4/unnumbered/interface-ref",
+        "table_title": "Reference to an interface or subinterface",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Interface",
+                "relative_path": "state/interface",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Subinterface",
+                "relative_path": "state/subinterface",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "ipv6",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-tunnel:tunnel/ipv6",
+        "help_text": "Parameters for the IPv6 address family",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-tunnel:tunnel/ipv6",
+        "table_title": "Parameters for the IPv6 address family",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Enabled",
+                "relative_path": "state/enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Mtu",
+                "relative_path": "state/mtu",
+                "width": 12,
+                "align": "right",
+                "unit": "octets"
+            },
+            {
+                "label": "Dup Addr Detect Transmits",
+                "relative_path": "state/dup-addr-detect-transmits",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Dhcp Client",
+                "relative_path": "state/dhcp-client",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Counters In Pkts",
+                "relative_path": "state/counters/in-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Octets",
+                "relative_path": "state/counters/in-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Error Pkts",
+                "relative_path": "state/counters/in-error-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Forwarded Pkts",
+                "relative_path": "state/counters/in-forwarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Forwarded Octets",
+                "relative_path": "state/counters/in-forwarded-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Discarded Pkts",
+                "relative_path": "state/counters/in-discarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Pkts",
+                "relative_path": "state/counters/out-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Octets",
+                "relative_path": "state/counters/out-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Error Pkts",
+                "relative_path": "state/counters/out-error-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Forwarded Pkts",
+                "relative_path": "state/counters/out-forwarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Forwarded Octets",
+                "relative_path": "state/counters/out-forwarded-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Discarded Pkts",
+                "relative_path": "state/counters/out-discarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "address",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-tunnel:tunnel/ipv6/addresses/address",
+        "help_text": "The list of configured IPv6 addresses on the interface",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-tunnel:tunnel/ipv6/addresses/address",
+        "table_title": "The list of configured IPv6 addresses on the interface",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Ip",
+                "relative_path": "state/ip",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Prefix Length",
+                "relative_path": "state/prefix-length",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Origin",
+                "relative_path": "state/origin",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Status",
+                "relative_path": "state/status",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "router-advertisement",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-tunnel:tunnel/ipv6/router-advertisement",
+        "help_text": "Configuration and operational state parameters relating to\nrouter advertisements",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-tunnel:tunnel/ipv6/router-advertisement",
+        "table_title": "Configuration and operational state parameters relating to\nrouter advertisements",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Interval",
+                "relative_path": "state/interval",
+                "width": 20,
+                "align": "right",
+                "unit": "seconds"
+            },
+            {
+                "label": "Lifetime",
+                "relative_path": "state/lifetime",
+                "width": 20,
+                "align": "right",
+                "unit": "seconds"
+            },
+            {
+                "label": "Suppress",
+                "relative_path": "state/suppress",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "neighbor",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-tunnel:tunnel/ipv6/neighbors/neighbor",
+        "help_text": "List of IPv6 neighbors",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-tunnel:tunnel/ipv6/neighbors/neighbor",
+        "table_title": "List of IPv6 neighbors",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Ip",
+                "relative_path": "state/ip",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Link Layer Address",
+                "relative_path": "state/link-layer-address",
+                "width": 40,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Origin",
+                "relative_path": "state/origin",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Is Router",
+                "relative_path": "state/is-router",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Neighbor State",
+                "relative_path": "state/neighbor-state",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "unnumbered",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-tunnel:tunnel/ipv6/unnumbered",
+        "help_text": "Top-level container for setting unnumbered interfaces",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-tunnel:tunnel/ipv6/unnumbered",
+        "table_title": "Top-level container for setting unnumbered interfaces",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Enabled",
+                "relative_path": "state/enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "interface-ref",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-if-tunnel:tunnel/ipv6/unnumbered/interface-ref",
+        "help_text": "Reference to an interface or subinterface",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-if-tunnel:tunnel/ipv6/unnumbered/interface-ref",
+        "table_title": "Reference to an interface or subinterface",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Interface",
+                "relative_path": "state/interface",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Subinterface",
+                "relative_path": "state/subinterface",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "routed-vlan",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan",
+        "help_text": "Top-level container for routed vlan interfaces",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan",
+        "table_title": "Top-level container for routed vlan interfaces",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Vlan",
+                "relative_path": "state/vlan",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "ipv6",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6",
+        "help_text": "Parameters for the IPv6 address family",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6",
+        "table_title": "Parameters for the IPv6 address family",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Enabled",
+                "relative_path": "state/enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Mtu",
+                "relative_path": "state/mtu",
+                "width": 12,
+                "align": "right",
+                "unit": "octets"
+            },
+            {
+                "label": "Dup Addr Detect Transmits",
+                "relative_path": "state/dup-addr-detect-transmits",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Dhcp Client",
+                "relative_path": "state/dhcp-client",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Counters In Pkts",
+                "relative_path": "state/counters/in-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Octets",
+                "relative_path": "state/counters/in-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Error Pkts",
+                "relative_path": "state/counters/in-error-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Forwarded Pkts",
+                "relative_path": "state/counters/in-forwarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Forwarded Octets",
+                "relative_path": "state/counters/in-forwarded-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Discarded Pkts",
+                "relative_path": "state/counters/in-discarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Pkts",
+                "relative_path": "state/counters/out-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Octets",
+                "relative_path": "state/counters/out-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Error Pkts",
+                "relative_path": "state/counters/out-error-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Forwarded Pkts",
+                "relative_path": "state/counters/out-forwarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Forwarded Octets",
+                "relative_path": "state/counters/out-forwarded-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Discarded Pkts",
+                "relative_path": "state/counters/out-discarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "address",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/addresses/address",
+        "help_text": "The list of configured IPv6 addresses on the interface",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/addresses/address",
+        "table_title": "The list of configured IPv6 addresses on the interface",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Ip",
+                "relative_path": "state/ip",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Prefix Length",
+                "relative_path": "state/prefix-length",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Origin",
+                "relative_path": "state/origin",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Status",
+                "relative_path": "state/status",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "vrrp-group",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/addresses/address/vrrp/vrrp-group",
+        "help_text": "List of VRRP groups, keyed by virtual router id",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/addresses/address/vrrp/vrrp-group",
+        "table_title": "List of VRRP groups, keyed by virtual router id",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Virtual Router Id",
+                "relative_path": "state/virtual-router-id",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Priority",
+                "relative_path": "state/priority",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Preempt",
+                "relative_path": "state/preempt",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Preempt Delay",
+                "relative_path": "state/preempt-delay",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Accept Mode",
+                "relative_path": "state/accept-mode",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Advertisement Interval",
+                "relative_path": "state/advertisement-interval",
+                "width": 20,
+                "align": "right",
+                "unit": "centiseconds"
+            },
+            {
+                "label": "Current Priority",
+                "relative_path": "state/current-priority",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Virtual Link Local",
+                "relative_path": "state/virtual-link-local",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "interface-tracking",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/addresses/address/vrrp/vrrp-group/interface-tracking",
+        "help_text": "Top-level container for VRRP interface tracking",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/addresses/address/vrrp/vrrp-group/interface-tracking",
+        "table_title": "Top-level container for VRRP interface tracking",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Priority Decrement",
+                "relative_path": "state/priority-decrement",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "router-advertisement",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/router-advertisement",
+        "help_text": "Configuration and operational state parameters relating to\nrouter advertisements",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/router-advertisement",
+        "table_title": "Configuration and operational state parameters relating to\nrouter advertisements",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Interval",
+                "relative_path": "state/interval",
+                "width": 20,
+                "align": "right",
+                "unit": "seconds"
+            },
+            {
+                "label": "Lifetime",
+                "relative_path": "state/lifetime",
+                "width": 20,
+                "align": "right",
+                "unit": "seconds"
+            },
+            {
+                "label": "Suppress",
+                "relative_path": "state/suppress",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "neighbor",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/neighbors/neighbor",
+        "help_text": "List of IPv6 neighbors",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/neighbors/neighbor",
+        "table_title": "List of IPv6 neighbors",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Ip",
+                "relative_path": "state/ip",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Link Layer Address",
+                "relative_path": "state/link-layer-address",
+                "width": 40,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Origin",
+                "relative_path": "state/origin",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Is Router",
+                "relative_path": "state/is-router",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Neighbor State",
+                "relative_path": "state/neighbor-state",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "unnumbered",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/unnumbered",
+        "help_text": "Top-level container for setting unnumbered interfaces",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/unnumbered",
+        "table_title": "Top-level container for setting unnumbered interfaces",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Enabled",
+                "relative_path": "state/enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "interface-ref",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/unnumbered/interface-ref",
+        "help_text": "Reference to an interface or subinterface",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv6/unnumbered/interface-ref",
+        "table_title": "Reference to an interface or subinterface",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Interface",
+                "relative_path": "state/interface",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Subinterface",
+                "relative_path": "state/subinterface",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "ipv4",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4",
+        "help_text": "Parameters for the IPv4 address family",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4",
+        "table_title": "Parameters for the IPv4 address family",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Enabled",
+                "relative_path": "state/enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Mtu",
+                "relative_path": "state/mtu",
+                "width": 12,
+                "align": "right",
+                "unit": "octets"
+            },
+            {
+                "label": "Dhcp Client",
+                "relative_path": "state/dhcp-client",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Counters In Pkts",
+                "relative_path": "state/counters/in-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Octets",
+                "relative_path": "state/counters/in-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Error Pkts",
+                "relative_path": "state/counters/in-error-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Forwarded Pkts",
+                "relative_path": "state/counters/in-forwarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Forwarded Octets",
+                "relative_path": "state/counters/in-forwarded-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters In Discarded Pkts",
+                "relative_path": "state/counters/in-discarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Pkts",
+                "relative_path": "state/counters/out-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Octets",
+                "relative_path": "state/counters/out-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Error Pkts",
+                "relative_path": "state/counters/out-error-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Forwarded Pkts",
+                "relative_path": "state/counters/out-forwarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Forwarded Octets",
+                "relative_path": "state/counters/out-forwarded-octets",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Counters Out Discarded Pkts",
+                "relative_path": "state/counters/out-discarded-pkts",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "address",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/addresses/address",
+        "help_text": "The list of configured IPv4 addresses on the interface",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/addresses/address",
+        "table_title": "The list of configured IPv4 addresses on the interface",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Ip",
+                "relative_path": "state/ip",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Prefix Length",
+                "relative_path": "state/prefix-length",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Unnumbered",
+                "relative_path": "state/unnumbered",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Origin",
+                "relative_path": "state/origin",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "vrrp-group",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/addresses/address/vrrp/vrrp-group",
+        "help_text": "List of VRRP groups, keyed by virtual router id",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/addresses/address/vrrp/vrrp-group",
+        "table_title": "List of VRRP groups, keyed by virtual router id",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Virtual Router Id",
+                "relative_path": "state/virtual-router-id",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Priority",
+                "relative_path": "state/priority",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Preempt",
+                "relative_path": "state/preempt",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Preempt Delay",
+                "relative_path": "state/preempt-delay",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            },
+            {
+                "label": "Accept Mode",
+                "relative_path": "state/accept-mode",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Advertisement Interval",
+                "relative_path": "state/advertisement-interval",
+                "width": 20,
+                "align": "right",
+                "unit": "centiseconds"
+            },
+            {
+                "label": "Current Priority",
+                "relative_path": "state/current-priority",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "interface-tracking",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/addresses/address/vrrp/vrrp-group/interface-tracking",
+        "help_text": "Top-level container for VRRP interface tracking",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/addresses/address/vrrp/vrrp-group/interface-tracking",
+        "table_title": "Top-level container for VRRP interface tracking",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Priority Decrement",
+                "relative_path": "state/priority-decrement",
+                "width": 12,
+                "align": "right",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "proxy-arp",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/proxy-arp",
+        "help_text": "Configuration and operational state parameters\nrelating to proxy ARP",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/proxy-arp",
+        "table_title": "Configuration and operational state parameters\nrelating to proxy ARP",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Mode",
+                "relative_path": "state/mode",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "neighbor",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/neighbors/neighbor",
+        "help_text": "A list of mappings from IPv4 addresses to\nlink-layer addresses",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/neighbors/neighbor",
+        "table_title": "A list of mappings from IPv4 addresses to\nlink-layer addresses",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Ip",
+                "relative_path": "state/ip",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Link Layer Address",
+                "relative_path": "state/link-layer-address",
+                "width": 40,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Origin",
+                "relative_path": "state/origin",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "unnumbered",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/unnumbered",
+        "help_text": "Top-level container for setting unnumbered interfaces",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/unnumbered",
+        "table_title": "Top-level container for setting unnumbered interfaces",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Enabled",
+                "relative_path": "state/enabled",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    },
+    {
+        "parent": "display",
+        "command": "interface-ref",
+        "callback_name": "cmd_show_data",
+        "xpath": "/openconfig-interfaces:interfaces/interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/unnumbered/interface-ref",
+        "help_text": "Reference to an interface or subinterface",
+        "root_layer_name": "interfaces",
+        "child_relative_xpath": "interface/openconfig-vlan:routed-vlan/openconfig-if-ip:ipv4/unnumbered/interface-ref",
+        "table_title": "Reference to an interface or subinterface",
+        "table_line": 140,
+        "fields": [
+            {
+                "label": "Interface",
+                "relative_path": "state/interface",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            },
+            {
+                "label": "Subinterface",
+                "relative_path": "state/subinterface",
+                "width": 20,
+                "align": "left",
+                "unit": null
+            }
+        ]
+    }
+]
