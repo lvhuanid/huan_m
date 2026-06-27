@@ -26,13 +26,17 @@ def convert_and_add_list(input_path, output_path):
             new_key = extracted_key
 
         # 构建新的 enum 内部字典结构
-        new_enum[new_key] = {
-            "value": full_key,
+        # new_enum[new_key] = {
+        #     "value": full_key,
+        #     "description": inner_val.get("description", ""),
+        # }
+        new_enum[full_key] = {
+            "value": new_key,
             "description": inner_val.get("description", ""),
         }
 
         # 将短键名追加到数组中
-        enum_list.append(new_key)
+        enum_list.append(full_key)
 
     # 4. 将更新后的数据写回结构中
     target["enum"] = new_enum
@@ -56,63 +60,30 @@ if __name__ == "__main__":
             "namespace": "openconfig-platform-transceiver",
             "type": "enumeration",
             "enum": {
-              "openconfig-transport-types:PT_2M": {
-                "description": "Ethernet 2Mbps"
-              },
-              "openconfig-transport-types:PT_100M": {
-                "description": "Ethernet 100Mbps"
-              },
-              "openconfig-transport-types:PT_1000M": {
-                "description": "Ethernet 1000Mbps"
-              },
-              "openconfig-transport-types:PT_10GBASE": {
-                "description": "Ethernet 100GBASE"
-              },
-              "openconfig-transport-types:PT_100GBASE": {
-                "description": "Ethernet 100GBASE"
-              },
-              "openconfig-transport-types:PT_200G": {
-                "description": "Ethernet 200G"
-              },
-              "openconfig-transport-types:PT_400G": {
-                "description": "Ethernet 400G"
-              },
-              "openconfig-transport-types:PT_600G": {
-                "description": "Ethernet 600G"
-              },
-              "openconfig-transport-types:PT_STM64": {
-                "description": "STM-64"
-              },
-              "openconfig-transport-types:PT_FC8G": {
-                "description": "FC8G"
-              },
-              "openconfig-transport-types:PT_FC10G": {
-                "description": "FC10G"
-              },
-              "openconfig-transport-types:PT_FC16G": {
-                "description": "FC16G"
-              },
-              "openconfig-transport-types:PT_FC32G": {
-                "description": "FC32G"
-              },
-              "openconfig-transport-types:PT_OTU2": {
-                "description": "OTU2"
-              },
-              "openconfig-transport-types:PT_OTU4": {
-                "description": "OTU4"
-              },
-              "openconfig-transport-types:PT_OTUC2": {
-                "description": "OTUC2"
-              },
-              "openconfig-transport-types:PT_OTUC4": {
-                "description": "OTUC4"
-              },
-              "openconfig-transport-types:PT_OTUC8": {
-                "description": "OTUC8"
-              },
-              "openconfig-transport-types:PT_OTUC12": {
-                "description": "OTUC12"
-              }
+               "openconfig-ospf-types:DOWN": {
+                            "description": "The initial state of a neighbor, indicating that no recent\ninformation has been received from the neighbor."
+                        },
+                        "openconfig-ospf-types:ATTEMPT": {
+                            "description": "Utilised for neighbors that are attached to NBMA networks, it\nindicates that no information has been recently received from\nthe neighbor but that Hello packets should be directly sent\nto that neighbor."
+                        },
+                        "openconfig-ospf-types:INIT": {
+                            "description": "Indicates that a Hello packet has been received from the\nneighbor but bi-directional communication has not yet been\nestablished. That is to say that the local Router ID does\nnot appear in the list of neighbors in the remote system's\nHello packet."
+                        },
+                        "openconfig-ospf-types:TWO_WAY": {
+                            "description": "Communication between the local and remote system is\nbi-directional such that the local system's Router ID is listed\nin the received remote system's Hello packet."
+                        },
+                        "openconfig-ospf-types:EXSTART": {
+                            "description": "An adjacency with the remote system is being formed. The local\nsystem is currently transmitting empty database description\npackets in order to establish the master/slave relationship for\nthe adjacency."
+                        },
+                        "openconfig-ospf-types:EXCHANGE": {
+                            "description": "The local and remote systems are currently exchanging database\ndescription packets in order to determine which elements of\ntheir local LSDBs are out of date."
+                        },
+                        "openconfig-ospf-types:LOADING": {
+                            "description": "The local system is sending Link State Request packets to the\nremote system in order to receive the more recently LSAs that\nwere discovered during the Exchange phase of the procedure\nestablishing the adjacency."
+                        },
+                        "openconfig-ospf-types:FULL": {
+                            "description": "The neighboring routers are fully adjacent such that both\nLSDBs are synchronized. The adjacency will appear in Router and\nNetwork LSAs"
+                        }
             },
             "description": "Indicates the service type of optical transceiver used on this\nport. It supports configuration on client ports and line ports.\nParameters include form-factor-preconf and ethernet-pmd-preconf\nare obsoleted. ",
             "config": "false"

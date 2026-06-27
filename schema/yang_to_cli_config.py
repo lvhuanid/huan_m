@@ -23,6 +23,7 @@ class Node:
         self.units = definition.get('units', '')
         self.config = definition.get('config', 'true')  # default true if missing
         self.enum = definition.get('enum', None)  # for enumerations
+        self.default_value = definition.get('default', None)  # default enum value
         self.union_value = definition.get('union-value', None)
         self.mandatory = definition.get('mandatory', 'false')
         self.parent = parent
@@ -47,6 +48,7 @@ def _build_node(name: str, obj: Dict, parent: Optional[Node]) -> Node:
         node.config = obj.get('config', 'true')
         node.description = obj.get('description', '')
         node.enum = obj.get('enum', None)
+        node.default_value = obj.get('default', None)
         node.union_value = obj.get('union-value', None)
         return node
 
@@ -67,6 +69,7 @@ def _build_node(name: str, obj: Dict, parent: Optional[Node]) -> Node:
         node.config = obj.get('config', definition.get('config', 'true'))
         node.description = obj.get('description', definition.get('description', ''))
         node.enum = obj.get('enum', definition.get('enum', None))
+        node.default_value = obj.get('default', definition.get('default', None))
         node.union_value = obj.get('union-value', definition.get('union-value', None))
     return node
 
@@ -237,13 +240,18 @@ def build_entry(target: Node, root_name: str) -> Dict:
             if child.yangType == 'leaf' and child.config == 'false':
                 align, width = get_alignment_and_width(child)
                 unit = child.units if child.units else None
-                fields.append({
+                field = {
                     "label": make_label(child),
                     "relative_path": f"state/{child.name}",
                     "width": width,
                     "align": align,
                     "unit": unit
-                })
+                }
+                if child.enum:
+                    field["enum"] = child.enum
+                if child.default_value:
+                    field["default"] = child.default_value
+                fields.append(field)
             elif child.yangType == 'container':
                 # Flatten container: include all leaves inside
                 container = child
@@ -253,13 +261,18 @@ def build_entry(target: Node, root_name: str) -> Dict:
                         unit = leaf.units if leaf.units else None
                         # For common pattern like cpu/usage, show 'instant' as main metric
                         # We include all leaves, but may produce a wide table.
-                        fields.append({
+                        field = {
                             "label": make_label(leaf, prefix=container.name.replace('-', ' ').title()),
                             "relative_path": f"state/{container.name}/{leaf.name}",
                             "width": width,
                             "align": align,
                             "unit": unit
-                        })
+                        }
+                        if leaf.enum:
+                            field["enum"] = leaf.enum
+                        if leaf.default_value:
+                            field["default"] = leaf.default_value
+                        fields.append(field)
 
     # Add parent list key references if target is nested
     add_parent_key_fields(target, fields, ypath, target)
@@ -307,3 +320,4 @@ if __name__ == '__main__':
     main()
 
     # uv run yang_to_cli_config.py "test_ input_schema.json" > cli_commands_config.json 2>&1; echo "Exit code: $?"
+    # uv run yang_to_cli_config.py "test_ input_rpc.json" > cli_commands_config_rpc.json 2>&1; echo "Exit code: $?"
