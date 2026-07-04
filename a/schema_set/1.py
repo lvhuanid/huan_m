@@ -13,6 +13,9 @@ class Node:
         self.type = definition.get('type', '')
         self.config = definition.get('config', 'true')
         self.union_value = definition.get('union-value', [])
+        self.default = definition.get('default', [])
+        self.units = definition.get('units', [])
+        self.type = definition.get('type', [])
         self.enum = definition.get('enum', {})
         self.parent = parent
         self.children: Dict[str, Node] = {}
@@ -32,6 +35,9 @@ def _build_node(name: str, obj: Dict, parent: Optional[Node]) -> Node:
         node.config = obj.get('config', 'true')
         node.description = obj.get('description', '')
         node.union_value = obj.get('union-value', [])
+        node.default = obj.get('default', [])
+        node.units = obj.get('units', [])
+        node.type = obj.get('type', [])
         node.enum = obj.get('enum', {})
         if parent:
             parent.add_child(node)
@@ -221,7 +227,10 @@ def build_entry_for_config(list_node: Node, config_node: Node) -> Dict:
             args_item = {
                 "name": child.name,
                 "mode": "CLI_CMD_OPTIONAL_ARGUMENT",
-                "help": desc
+                "help": desc,
+                "default": child.default if child.default else None,
+                "type": child.type if child.type else None,
+                "units": child.units if child.units else None
             }
             if child.union_value:
                 args_item["union-value"] = transform_union_value(child.union_value)
